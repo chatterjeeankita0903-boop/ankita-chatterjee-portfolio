@@ -1,3 +1,10 @@
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/playfair-display/600.css";
+import "@fontsource/playfair-display/700.css";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -72,11 +79,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Ankita Chatterjee — Product Manager" },
+      { name: "description", content: "Product Manager focused on Tech & AI products, UX optimization, and data-driven growth. Portfolio of apps, AI agents, dashboards, and product case studies." },
+      { name: "author", content: "Ankita Chatterjee" },
+      { property: "og:title", content: "Ankita Chatterjee — Product Manager" },
+      { property: "og:description", content: "Product, Tech & AI Management. Portfolio of AI apps, agents, dashboards, and product case studies." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
