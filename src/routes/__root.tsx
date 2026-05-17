@@ -79,14 +79,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ankita Chatterjee — Product Manager" },
-      { name: "description", content: "Product Manager focused on Tech & AI products, UX optimization, and data-driven growth. Portfolio of apps, AI agents, dashboards, and product case studies." },
+      { title: "Ankita Chatterjee — Portfolio" },
+      { name: "description", content: "Portfolio of apps, AI agents, dashboards, and product case studies." },
       { name: "author", content: "Ankita Chatterjee" },
-      { property: "og:title", content: "Ankita Chatterjee — Product Manager" },
-      { property: "og:description", content: "Product, Tech & AI Management. Portfolio of AI apps, agents, dashboards, and product case studies." },
+      { property: "og:title", content: "Ankita Chatterjee — Portfolio" },
+      { property: "og:description", content: "Portfolio of apps, AI agents, dashboards, and product case studies." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Ankita Chatterjee — Portfolio" },
+      { name: "twitter:description", content: "Portfolio of apps, AI agents, dashboards, and product case studies." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d2bdcbb0-ae20-4724-9ba5-075d4c7075a3/id-preview-6625c8c8--38666d10-da2d-42b5-8963-01a87d6dfea3.lovable.app-1779038740358.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d2bdcbb0-ae20-4724-9ba5-075d4c7075a3/id-preview-6625c8c8--38666d10-da2d-42b5-8963-01a87d6dfea3.lovable.app-1779038740358.png" },
     ],
     links: [
       {
