@@ -140,7 +140,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
       {
         title: "Bank Marketing Analytics Dashboard",
         description: "Analyzes customer demographics — marital status, education, occupation — against average account balances to identify high-value segments for targeted marketing.",
-        links: [{ label: "Dashboard", href: "https://drive.google.com/file/d/107JYdUpCvw3-TM8Le2JTEmrOLPRwMABr/view?usp=drive_link" }],
+        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/Bank%20Marketing.pbix" }],
       },
       {
         title: "Bank Customer Churn & Behavioral Analytics",
