@@ -260,13 +260,13 @@ function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1.5fr_1fr] md:py-28">
         <div>
           <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-accent">
-            Product Manager · Tech & AI
+            Technical Product Manager · Tech & AI
           </p>
           <h1 className="font-display text-5xl font-bold leading-[1.05] text-primary md:text-6xl">
             Ankita Chatterjee
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Product Manager focused on building scalable Tech &amp; AI products,
+            Technical Product Manager focused on building scalable Tech &amp; AI products,
             UX optimization, and data-driven growth.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -321,7 +321,7 @@ function About() {
         <div className="grid gap-12 md:grid-cols-3">
           <div className="md:col-span-2">
             <p className="text-base leading-relaxed text-muted-foreground">
-              I'm a Product Manager at Axis Bank's Digital Business &amp; Transformations division,
+              I'm a Technical Product Manager at Axis Bank's Digital Business &amp; Transformations division,
               leading cross-functional teams across technical product management, product building,
               GTM strategy, and AI-driven innovation. I've built agentic AI solutions, rapid prototypes,
               executive dashboards, and applied Six Sigma frameworks to drive product performance,
@@ -339,7 +339,7 @@ function About() {
             </h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><span><span className="text-foreground">Mumbai</span><span className="text-muted-foreground"> · Hometown: Jamshedpur</span></span></li>
-              <li className="flex items-start gap-2"><Briefcase className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><span className="text-muted-foreground">Product Manager, Axis Bank</span></li>
+              <li className="flex items-start gap-2"><Briefcase className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><span className="text-muted-foreground">Technical Product Manager, Axis Bank</span></li>
               <li className="flex items-start gap-2"><GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><span className="text-muted-foreground">MBA — NMIMS Mumbai</span></li>
             </ul>
           </div>
@@ -359,7 +359,7 @@ function Experience() {
             <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
               <Briefcase className="h-5 w-5" />
             </div>
-            <h3 className="font-display text-xl font-semibold text-primary">Product Manager</h3>
+            <h3 className="font-display text-xl font-semibold text-primary">Technical Product Manager</h3>
             <p className="mt-1 text-sm font-medium text-foreground">Axis Bank · Digital Business &amp; Transformations</p>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               Leading cross-functional teams across technical product management, product building,
@@ -490,7 +490,7 @@ function Contact() {
           <div>
             <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-accent">Contact</p>
             <h2 className="font-display text-4xl font-bold leading-tight md:text-5xl">
-              Let's build something thoughtful together.
+              Let's connect — I'm open to new opportunities.
             </h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-primary-foreground/75">
               Open to product roles, collaborations, and conversations on AI-driven product innovation.
@@ -524,7 +524,7 @@ function Footer() {
   return (
     <footer className="border-t border-border bg-background py-8">
       <div className="mx-auto max-w-6xl px-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Ankita Chatterjee · Product Manager
+        © {new Date().getFullYear()} Ankita Chatterjee · Technical Product Manager
       </div>
     </footer>
   );
