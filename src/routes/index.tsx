@@ -117,7 +117,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "RAG-based Copilot Studio agent helping BCBO/FIG field agents instantly access Social Security Scheme details (PMSBY, PMJJBY, PMJDY, APY), SOPs, and branch SPOC mapping — reducing knowledge gaps at grassroots banking.",
         tech: "Microsoft Copilot Studio · RAG · Power Automate",
         links: [
-          { label: "Documentation", href: "https://docs.google.com/document/d/1IlQZqkQFtzt3-W6H49pxBbhEQ8YZ077i/edit?usp=sharing&ouid=106106444419603100946&rtpof=true&sd=true" },
+          { label: "Documentation", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQA2LHmrPIwoTp7OCuf1GpRBAQwHjLYT-xstCR-O_ZDmFpo?e=hdfKb2" },
         ],
       },
     ],
