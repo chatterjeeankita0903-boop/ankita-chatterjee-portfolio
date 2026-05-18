@@ -145,7 +145,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
       {
         title: "Bank Customer Churn & Behavioral Analytics",
         description: "Churn analytics examining demographics, product holdings, and engagement patterns to identify at-risk customers and drive retention strategies.",
-        links: [{ label: "Dashboard", href: "https://drive.google.com/file/d/1HimvhvGsCPDhN_eQ_d4kXvJQsQEkrPY_/view?usp=sharing" }],
+        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/Bank%20Customer%20Churn.pbix" }],
       },
     ],
   },
