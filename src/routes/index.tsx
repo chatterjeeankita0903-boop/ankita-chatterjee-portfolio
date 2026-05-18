@@ -130,22 +130,22 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
       {
         title: "FI Index Scorecard — Social Security Schemes",
         description: "Power BI dashboard tracking target vs. achievement across India's key social security schemes (APY, PMJJBY, PMSBY, PMJDY) with a consolidated Financial Inclusion Index Score.",
-        links: [{ label: "Dashboard", href: "https://drive.google.com/file/d/1zLfzW22RSC3thEuJCxhEXvFglxwKK3OP/view?usp=sharing" }],
+        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/FI%20Index%20Scorecard%20Review.pbix" }],
       },
       {
         title: "CarInfo Insurance Analytics",
         description: "Executive dashboard covering sales, premiums, claims risk, renewals, partner performance, and marketing funnel across major Indian insurers including Bajaj Allianz and New India Assurance.",
-        links: [{ label: "Dashboard", href: "https://drive.google.com/file/d/1Ez-YwAStLY-Jyy97XkKnZp5LggncsiT9/view?usp=sharing" }],
+        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/CarInfo%20Dashboard%20Final.pbix" }],
       },
       {
         title: "Bank Marketing Analytics Dashboard",
         description: "Analyzes customer demographics — marital status, education, occupation — against average account balances to identify high-value segments for targeted marketing.",
-        links: [{ label: "Dashboard", href: "https://drive.google.com/file/d/107JYdUpCvw3-TM8Le2JTEmrOLPRwMABr/view?usp=drive_link" }],
+        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/Bank%20Marketing.pbix" }],
       },
       {
         title: "Bank Customer Churn & Behavioral Analytics",
         description: "Churn analytics examining demographics, product holdings, and engagement patterns to identify at-risk customers and drive retention strategies.",
-        links: [{ label: "Dashboard", href: "https://drive.google.com/file/d/1HimvhvGsCPDhN_eQ_d4kXvJQsQEkrPY_/view?usp=sharing" }],
+        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/Bank%20Customer%20Churn.pbix" }],
       },
     ],
   },
