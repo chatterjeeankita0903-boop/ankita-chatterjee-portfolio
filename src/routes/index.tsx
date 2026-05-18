@@ -55,7 +55,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         tech: "Claude (Anthropic) · React · HTML/CSS",
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/234d15b7-74fe-4d30-9d6c-3ba85d9b80d1" },
-          { label: "Deck", href: "https://docs.google.com/presentation/d/16B5t6Q8zHftosmGgkujzFS0QFu2iLbN4/edit?usp=sharing&ouid=106106444419603100946&rtpof=true&sd=true" },
+          { label: "Deck", href: "https://1drv.ms/p/c/66052eb9d4e727fc/IQBigz7UYO_ySaT4TYjpZ6BBAR-ONSxxger7UG0Nrmfj6g0?e=XnQOm5" },
         ],
       },
       {
@@ -64,7 +64,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         tech: "Claude (Anthropic) · React · HTML/CSS",
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/fce67220-e0b9-4143-b4dd-765cb43f267b" },
-          { label: "PRD", href: "https://docs.google.com/document/d/10F5hgYHazWXMLQTj5wloOn8xmEspx75I/edit?usp=sharing&ouid=106106444419603100946&rtpof=true&sd=true" },
+          { label: "PRD", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBE-sGUTqmKSY34fUnQTg_VAR6wPcQ7-CRvgj_Cg4qCEOw?e=b2Qo1E" },
         ],
       },
       {
@@ -76,9 +76,10 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
       {
         title: "Wander — AI Travel Discovery",
         description: "AI travel app surfacing personalized destination recommendations and trip ideas through an elegant, conversational interface.",
-        tech: "Claude (Anthropic) · HTML/CSS/JS",
+        tech: "Antigravity · HTML/CSS/JS",
         links: [
-          { label: "Deck", href: "https://docs.google.com/presentation/d/19RNnXRj2NTuLyKBK7_ZY9B3_LSduOMIb/edit?usp=sharing&ouid=106106444419603100946&rtpof=true&sd=true" },
+          { label: "Live App", href: "/wander/index.html" },
+          { label: "Deck", href: "https://1drv.ms/p/c/66052eb9d4e727fc/IQDR_SEBCg52TrmLmBvGX4fhAQEg8syiwuHXnMuV1E3BWPk?e=ncUlU4" },
         ],
       },
       {
@@ -108,7 +109,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Copilot Studio agent generating personalized, budget-aware, hour-by-hour travel itineraries covering each day from morning to night with no time gaps.",
         tech: "Microsoft Copilot Studio · Generative AI · Prompt Engineering",
         links: [
-          { label: "Documentation", href: "https://docs.google.com/document/d/1s4mPZem9vLbSKr2JaDPwZueSAdqtD3v0/edit?usp=sharing&ouid=106106444419603100946&rtpof=true&sd=true" },
+          { label: "Documentation", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBs_v0afU-IQ7nYIdGmzJ3sAaN7neB2-WombhYfZUIZo44?e=vaZpxU" },
         ],
       },
       {
@@ -116,7 +117,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "RAG-based Copilot Studio agent helping BCBO/FIG field agents instantly access Social Security Scheme details (PMSBY, PMJJBY, PMJDY, APY), SOPs, and branch SPOC mapping — reducing knowledge gaps at grassroots banking.",
         tech: "Microsoft Copilot Studio · RAG · Power Automate",
         links: [
-          { label: "Documentation", href: "https://docs.google.com/document/d/1IlQZqkQFtzt3-W6H49pxBbhEQ8YZ077i/edit?usp=sharing&ouid=106106444419603100946&rtpof=true&sd=true" },
+          { label: "Documentation", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQA2LHmrPIwoTp7OCuf1GpRBAQwHjLYT-xstCR-O_ZDmFpo?e=hdfKb2" },
         ],
       },
     ],
