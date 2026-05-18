@@ -109,7 +109,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Copilot Studio agent generating personalized, budget-aware, hour-by-hour travel itineraries covering each day from morning to night with no time gaps.",
         tech: "Microsoft Copilot Studio · Generative AI · Prompt Engineering",
         links: [
-          { label: "Documentation", href: "https://docs.google.com/document/d/1s4mPZem9vLbSKr2JaDPwZueSAdqtD3v0/edit?usp=sharing&ouid=106106444419603100946&rtpof=true&sd=true" },
+          { label: "Documentation", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBs_v0afU-IQ7nYIdGmzJ3sAaN7neB2-WombhYfZUIZo44?e=vaZpxU" },
         ],
       },
       {
