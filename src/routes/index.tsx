@@ -130,7 +130,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
       {
         title: "FI Index Scorecard — Social Security Schemes",
         description: "Power BI dashboard tracking target vs. achievement across India's key social security schemes (APY, PMJJBY, PMSBY, PMJDY) with a consolidated Financial Inclusion Index Score.",
-        links: [{ label: "Dashboard", href: "https://drive.google.com/file/d/1zLfzW22RSC3thEuJCxhEXvFglxwKK3OP/view?usp=sharing" }],
+        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/FI%20Index%20Scorecard%20Review.pbix" }],
       },
       {
         title: "CarInfo Insurance Analytics",
