@@ -37,7 +37,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         tech: "Lovable · React · Supabase",
         links: [
           { label: "Live App", href: "https://fin-clarity-smart.lovable.app" },
-          { label: "Deck", href: "https://docs.google.com/presentation/d/1-qGwxdEA2AgfMC7cOg6q1ML0nsikjZPq/edit?usp=sharing&ouid=106106444419603100946&rtpof=true&sd=true" },
+          { label: "Deck", href: "https://1drv.ms/p/c/66052eb9d4e727fc/IQBdevdy_oTKRJW1UdV75Ad8AdZQ-_iQa7LJCukgMlqW9ik?e=7efetJ" },
         ],
       },
       {
