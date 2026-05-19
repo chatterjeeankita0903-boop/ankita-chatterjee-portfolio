@@ -472,13 +472,13 @@ function Projects() {
                           rel="noreferrer noopener"
                           className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
                         >
-                          <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-foreground/90 shadow-xl">
-                            <div className="aspect-[9/19]">
+                          <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
+                            <div className="aspect-[9/19] flex items-center justify-center">
                               <img
                                 src={p.thumbnail}
                                 alt={`${p.title} preview`}
                                 loading="lazy"
-                                className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                                className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                               />
                             </div>
                           </div>
