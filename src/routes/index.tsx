@@ -470,14 +470,18 @@ function Projects() {
                           href={p.links[0]?.href}
                           target="_blank"
                           rel="noreferrer noopener"
-                          className="block aspect-[16/10] overflow-hidden border-b border-border bg-muted"
+                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
                         >
-                          <img
-                            src={p.thumbnail}
-                            alt={`${p.title} preview`}
-                            loading="lazy"
-                            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                          />
+                          <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
+                            <div className="aspect-[9/19] flex items-center justify-center">
+                              <img
+                                src={p.thumbnail}
+                                alt={`${p.title} preview`}
+                                loading="lazy"
+                                className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                              />
+                            </div>
+                          </div>
                         </a>
                       )}
                       <div className="flex flex-1 flex-col p-6">
