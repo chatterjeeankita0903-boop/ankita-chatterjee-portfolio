@@ -463,8 +463,24 @@ function Projects() {
                   {group.items.map((p) => (
                     <article
                       key={p.title}
-                      className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-0.5 hover:shadow-md"
+                      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
                     >
+                      {p.thumbnail && (
+                        <a
+                          href={p.links[0]?.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="block aspect-[16/10] overflow-hidden border-b border-border bg-muted"
+                        >
+                          <img
+                            src={p.thumbnail}
+                            alt={`${p.title} preview`}
+                            loading="lazy"
+                            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </a>
+                      )}
+                      <div className="flex flex-1 flex-col p-6">
                       <h4 className="font-display text-lg font-semibold leading-snug text-primary">
                         {p.title}
                       </h4>
@@ -486,6 +502,7 @@ function Projects() {
                             {l.label} <ExternalLink className="h-3 w-3" />
                           </a>
                         ))}
+                      </div>
                       </div>
                     </article>
                   ))}
