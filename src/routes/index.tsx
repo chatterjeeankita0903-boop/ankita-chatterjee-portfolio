@@ -5,6 +5,17 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import profilePhoto from "@/assets/ankita-profile.jpg";
+import thumbEbt from "@/assets/projects/ebt.jpg";
+import thumbFinclarity from "@/assets/projects/finclarity.jpg";
+import thumbOnset from "@/assets/projects/onset.jpg";
+import thumbBlinkit from "@/assets/projects/blinkit.jpg";
+import thumbUberSafe from "@/assets/projects/ubersafe.jpg";
+import thumbLighting from "@/assets/projects/lighting.jpg";
+import thumbWander from "@/assets/projects/wander.jpg";
+import thumbFiScorecard from "@/assets/projects/fi-scorecard.jpg";
+import thumbLumiere from "@/assets/projects/lumiere.jpg";
+import thumbTravelAgent from "@/assets/projects/travel-agent.jpg";
+import thumbSssAgent from "@/assets/projects/sss-agent.jpg";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -22,6 +33,7 @@ type Project = {
   title: string;
   description: string;
   tech?: string;
+  thumbnail?: string;
   links: { label: string; href: string }[];
 };
 
