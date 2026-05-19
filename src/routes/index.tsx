@@ -47,14 +47,6 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "Digital PL External Balance Transfer Journey",
         description: "A working prototype D2C Digital journey of Personal Loan External Balance Transfer. External balance transfer is a process of transferring existing Financier's loan to other Financier to get lower interest rate, extra funds, varying tenure etc. This prototype was created to conduct usability testing of the front end look and feel of the App before finalizing the journey in the Axis Bank platform.",
         tech: "Lovable · Figma",
-        links: [
-          { label: "Live App", href: "https://ebt-aa.lovable.app" },
-        ],
-      },
-      {
-        title: "Digital PL External Balance Transfer Journey",
-        description: "A working prototype D2C Digital journey of Personal Loan External Balance Transfer. External balance transfer is a process of transferring existing Financier's loan to other Financier to get lower interest rate, extra funds, varying tenure etc. This prototype was created to conduct usability testing of the front end look and feel of the App before finalizing the journey in the Axis Bank platform.",
-        tech: "Lovable · Figma",
         thumbnail: thumbEbt,
         links: [
           { label: "Live App", href: "https://ebt-aa.lovable.app" },
