@@ -5,6 +5,17 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import profilePhoto from "@/assets/ankita-profile.jpg";
+import thumbEbt from "@/assets/projects/ebt.jpg";
+import thumbFinclarity from "@/assets/projects/finclarity.jpg";
+import thumbOnset from "@/assets/projects/onset.jpg";
+import thumbBlinkit from "@/assets/projects/blinkit.jpg";
+import thumbUberSafe from "@/assets/projects/ubersafe.jpg";
+import thumbLighting from "@/assets/projects/lighting.jpg";
+import thumbWander from "@/assets/projects/wander.jpg";
+import thumbFiScorecard from "@/assets/projects/fi-scorecard.jpg";
+import thumbLumiere from "@/assets/projects/lumiere.jpg";
+import thumbTravelAgent from "@/assets/projects/travel-agent.jpg";
+import thumbSssAgent from "@/assets/projects/sss-agent.jpg";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -22,6 +33,7 @@ type Project = {
   title: string;
   description: string;
   tech?: string;
+  thumbnail?: string;
   links: { label: string; href: string }[];
 };
 
@@ -35,6 +47,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "Digital PL External Balance Transfer Journey",
         description: "A working prototype D2C Digital journey of Personal Loan External Balance Transfer. External balance transfer is a process of transferring existing Financier's loan to other Financier to get lower interest rate, extra funds, varying tenure etc. This prototype was created to conduct usability testing of the front end look and feel of the App before finalizing the journey in the Axis Bank platform.",
         tech: "Lovable · Figma",
+        thumbnail: thumbEbt,
         links: [
           { label: "Live App", href: "https://ebt-aa.lovable.app" },
         ],
@@ -43,6 +56,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "FinClarity — Smart Finance Tracker",
         description: "AI-powered personal finance app offering expense tracking, budgeting, and actionable financial insights in one clean dashboard.",
         tech: "Lovable · React · Supabase",
+        thumbnail: thumbFinclarity,
         links: [
           { label: "Live App", href: "https://fin-clarity-smart.lovable.app" },
           { label: "Deck", href: "https://1drv.ms/p/c/66052eb9d4e727fc/IQBdevdy_oTKRJW1UdV75Ad8AdZQ-_iQa7LJCukgMlqW9ik?e=7efetJ" },
@@ -52,6 +66,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "Investment Fund Selector for Beginners",
         description: "Interactive platform helping first-time investors through smart personalization and curated portfolio guidance.",
         tech: "Claude (Anthropic) · React · HTML/CSS",
+        thumbnail: thumbOnset,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/1597c430-efb5-4ea5-90b7-6342d89c0f94" },
           { label: "Deck", href: "https://canva.link/2go3upmujh38yuf" },
@@ -61,6 +76,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "Improvised Blinkit UX Prototype",
         description: "Mobile prototype redesigning Blinkit to increase AOV and customer base through better discovery and UX.",
         tech: "Claude (Anthropic) · React · HTML/CSS",
+        thumbnail: thumbBlinkit,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/234d15b7-74fe-4d30-9d6c-3ba85d9b80d1" },
           { label: "Deck", href: "https://1drv.ms/p/c/66052eb9d4e727fc/IQBigz7UYO_ySaT4TYjpZ6BBAR-ONSxxger7UG0Nrmfj6g0?e=XnQOm5" },
@@ -70,6 +86,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "Uber Safe — Ride Safety App",
         description: "Prototype giving Uber a safety-first ride experience that integrates preventive, real-time, and post-ride safety mechanisms.",
         tech: "Claude (Anthropic) · React · HTML/CSS",
+        thumbnail: thumbUberSafe,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/fce67220-e0b9-4143-b4dd-765cb43f267b" },
           { label: "PRD", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBE-sGUTqmKSY34fUnQTg_VAR6wPcQ7-CRvgj_Cg4qCEOw?e=b2Qo1E" },
@@ -79,12 +96,14 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "Lighting Defect Register",
         description: "Field-ready app for logging, tracking, and managing lighting defects across locations — streamlining on-site quality reporting.",
         tech: "Lovable · React · Supabase",
+        thumbnail: thumbLighting,
         links: [{ label: "Live App", href: "https://lightingdefectregister.lovable.app/" }],
       },
       {
         title: "Wander — AI Travel Discovery",
         description: "AI travel app surfacing personalized destination recommendations and trip ideas through an elegant, conversational interface.",
         tech: "Antigravity · HTML/CSS/JS",
+        thumbnail: thumbWander,
         links: [
           { label: "Live App", href: "/wander/index.html" },
           { label: "Deck", href: "https://1drv.ms/p/c/66052eb9d4e727fc/IQDR_SEBCg52TrmLmBvGX4fhAQEg8syiwuHXnMuV1E3BWPk?e=ncUlU4" },
@@ -94,12 +113,14 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "FI Scorecard App",
         description: "Interactive web app visualizing financial inclusion scheme performance and FI Index metrics in a clean, browser-based interface.",
         tech: "Lovable · React · MS Excel",
+        thumbnail: thumbFiScorecard,
         links: [{ label: "Dashboard", href: "https://fiscorecard.lovable.app" }],
       },
       {
         title: "Lumière Beauty — E-commerce with n8n",
         description: "Luxury D2C beauty storefront for product reviews and customer query resolution — integrated with a live n8n automation workflow.",
         tech: "Lovable · React · n8n · Telegram · Google Sheets · OpenAI GPT-4",
+        thumbnail: thumbLumiere,
         links: [
           { label: "Live App", href: "https://lumiere-ankita.lovable.app" },
           { label: "Walkthrough", href: "https://drive.google.com/file/d/1TeaItOd8ICoHOH1zZ-StoEeJrtQ2-hVx/view?usp=sharing" },
@@ -116,6 +137,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "Travel Itinerary Planning Agent",
         description: "Copilot Studio agent generating personalized, budget-aware, hour-by-hour travel itineraries covering each day from morning to night with no time gaps.",
         tech: "Microsoft Copilot Studio · Generative AI · Prompt Engineering",
+        thumbnail: thumbTravelAgent,
         links: [
           { label: "Documentation", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBs_v0afU-IQ7nYIdGmzJ3sAaN7neB2-WombhYfZUIZo44?e=vaZpxU" },
         ],
@@ -124,6 +146,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "SSS Assistant Agent — Axis Bank Bharat Banking",
         description: "RAG-based Copilot Studio agent helping BCBO/FIG field agents instantly access Social Security Scheme details (PMSBY, PMJJBY, PMJDY, APY), SOPs, and branch SPOC mapping — reducing knowledge gaps at grassroots banking.",
         tech: "Microsoft Copilot Studio · RAG · Power Automate",
+        thumbnail: thumbSssAgent,
         links: [
           { label: "Documentation", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQA2LHmrPIwoTp7OCuf1GpRBAQwHjLYT-xstCR-O_ZDmFpo?e=hdfKb2" },
         ],
@@ -440,8 +463,24 @@ function Projects() {
                   {group.items.map((p) => (
                     <article
                       key={p.title}
-                      className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-0.5 hover:shadow-md"
+                      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
                     >
+                      {p.thumbnail && (
+                        <a
+                          href={p.links[0]?.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="block aspect-[16/10] overflow-hidden border-b border-border bg-muted"
+                        >
+                          <img
+                            src={p.thumbnail}
+                            alt={`${p.title} preview`}
+                            loading="lazy"
+                            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </a>
+                      )}
+                      <div className="flex flex-1 flex-col p-6">
                       <h4 className="font-display text-lg font-semibold leading-snug text-primary">
                         {p.title}
                       </h4>
@@ -463,6 +502,7 @@ function Projects() {
                             {l.label} <ExternalLink className="h-3 w-3" />
                           </a>
                         ))}
+                      </div>
                       </div>
                     </article>
                   ))}
