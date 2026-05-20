@@ -306,6 +306,26 @@ function Hero() {
               Get in Touch
             </a>
           </div>
+          <div className="mt-6">
+            <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              Jump to projects
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {PROJECT_GROUPS.map((g) => {
+                const Icon = g.icon;
+                return (
+                  <a
+                    key={g.id}
+                    href={`#${g.id}`}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-accent hover:bg-accent/10 hover:text-primary"
+                  >
+                    <Icon className="h-3.5 w-3.5 text-accent" />
+                    {g.title}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
             <span className="inline-flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> Mumbai, India</span>
             <span className="inline-flex items-center gap-1.5"><Briefcase className="h-3.5 w-3.5" /> Axis Bank — Digital Business &amp; Transformations</span>
