@@ -490,7 +490,7 @@ function Projects() {
                                   src={p.thumbnail}
                                   alt={`${p.title} preview`}
                                   loading="lazy"
-                                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                  className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
                                 />
                               </div>
                             </div>
