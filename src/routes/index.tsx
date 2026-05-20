@@ -16,6 +16,10 @@ import thumbFiScorecard from "@/assets/projects/fi-scorecard.jpg";
 import thumbLumiere from "@/assets/projects/lumiere.jpg";
 import thumbTravelAgent from "@/assets/projects/travel-agent.jpg";
 import thumbSssAgent from "@/assets/projects/sss-agent.jpg";
+import thumbPbiFi from "@/assets/projects/pbi-fi-scorecard.png";
+import thumbPbiCarInfo from "@/assets/projects/pbi-carinfo.png";
+import thumbPbiBankMarketing from "@/assets/projects/pbi-bank-marketing.png";
+import thumbPbiBankChurn from "@/assets/projects/pbi-bank-churn.png";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -161,6 +165,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
       {
         title: "FI Index Scorecard — Social Security Schemes",
         description: "Power BI dashboard tracking target vs. achievement across India's key social security schemes (APY, PMJJBY, PMSBY, PMJDY) with a consolidated Financial Inclusion Index Score.",
+        thumbnail: thumbPbiFi,
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/FI%20Index%20Scorecard%20Review.pbix" },
           { label: "Dashboard Glimpses", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBOBaltx_VoT41JZS0b8dCxAa-WQ4WFY6FbZuAIRdKJEos?e=dKd4UD" },
@@ -169,6 +174,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
       {
         title: "CarInfo Insurance Analytics",
         description: "Executive dashboard covering sales, premiums, claims risk, renewals, partner performance, and marketing funnel across major Indian insurers including Bajaj Allianz and New India Assurance.",
+        thumbnail: thumbPbiCarInfo,
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/CarInfo%20Dashboard%20Final.pbix" },
           { label: "Dashboard Glimpses", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQDl99cV37P3SZV8CjU74Mr-AV8ku5VFLMFWhZQZDZbd4sE?e=95kWH1" },
@@ -177,6 +183,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
       {
         title: "Bank Marketing Analytics Dashboard",
         description: "Analyzes customer demographics — marital status, education, occupation — against average account balances to identify high-value segments for targeted marketing.",
+        thumbnail: thumbPbiBankMarketing,
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/Bank%20Marketing.pbix" },
           { label: "Dashboard Glimpses", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQCEU3EfSzxNT73l6qbvGFHEASz0x7o3Zx5URoAO5VgUMKQ?e=1IOk1t" },
@@ -185,6 +192,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
       {
         title: "Bank Customer Churn & Behavioral Analytics",
         description: "Churn analytics examining demographics, product holdings, and engagement patterns to identify at-risk customers and drive retention strategies.",
+        thumbnail: thumbPbiBankChurn,
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/Bank%20Customer%20Churn.pbix" },
           { label: "Dashboard Glimpses", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQAmjusxZwKUTJ6E9lhMcFMDAf3KZfDAKojUIcnHfDud_2w?e=yh1jnz" },
@@ -504,7 +512,7 @@ function Projects() {
                           rel="noreferrer noopener"
                           className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
                         >
-                          {group.id === "copilot-agents" ? (
+                          {group.id === "copilot-agents" || group.id === "powerbi" ? (
                             <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
                               <div className="aspect-[16/10] flex items-center justify-center">
                                 <img
