@@ -274,6 +274,63 @@ function Portfolio() {
       </main>
       <Footer />
       <QuickJump />
+      <ScrollHint />
+    </div>
+  );
+}
+
+function ScrollHint() {
+  const [show, setShow] = useState(false);
+  const [closed, setClosed] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("scrollHintSeen")) return;
+    const onScroll = () => {
+      if (window.scrollY > 280) {
+        setShow(true);
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const dismiss = () => {
+    setClosed(true);
+    sessionStorage.setItem("scrollHintSeen", "1");
+  };
+
+  useEffect(() => {
+    if (!show || closed) return;
+    const t = setTimeout(dismiss, 9000);
+    return () => clearTimeout(t);
+  }, [show, closed]);
+
+  if (!show || closed) return null;
+
+  return (
+    <div className="fixed left-1/2 top-20 z-[60] w-[min(92vw,420px)] -translate-x-1/2 animate-in fade-in slide-in-from-top-4 duration-500">
+      <div className="relative overflow-hidden rounded-xl border border-accent/40 bg-card p-4 pr-10 shadow-2xl ring-1 ring-accent/20">
+        <div className="flex items-start gap-3">
+          <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+            <Sparkles className="h-4 w-4" />
+          </span>
+          <div className="text-sm leading-relaxed text-foreground">
+            <p className="font-medium text-primary">Quick tip</p>
+            <p className="mt-0.5 text-muted-foreground">
+              Use <span className="font-semibold text-foreground">"Project sections"</span> in the top bar to jump straight to any project category.
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={dismiss}
+          aria-label="Dismiss tip"
+          className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
     </div>
   );
 }
