@@ -209,13 +209,19 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "YouTube Video Summary Creator (LangChain RAG Agent)",
         description: "RAG-based agent extracting YouTube transcripts, storing them in a vector database, and answering questions strictly grounded in the video content — engineered to eliminate hallucinations.",
         tech: "LangChain · OpenAI GPT-4 · YouTube Transcript API · Vector DB · Python",
-        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" }],
+        links: [
+          { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" },
+          { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQAk3Vhy11RUQooN5wAE7QslAcPaNTOBKlQEtly9l6Gf8Mk?e=J1O8Ic" },
+        ],
       },
       {
         title: "Multi-Agent RAG Chatbot Collection (LangGraph)",
         description: "Two conversational AI systems — a general-purpose LLM chatbot and a document-grounded RAG assistant — built with LangGraph to demonstrate stateful agent orchestration and private knowledge retrieval.",
         tech: "LangGraph · GPT-4o · FAISS · Python · Jupyter",
-        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-Using-LangGraph" }],
+        links: [
+          { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-Using-LangGraph" },
+          { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBYnSstw6WfSayG4Di0fv1cAVVir5no5SRvuMiYBVV0zfw?e=mBibjI" },
+        ],
       },
     ],
   },
