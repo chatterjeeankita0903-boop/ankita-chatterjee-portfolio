@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   Mail, Phone, MapPin, Github, Linkedin, Download, ExternalLink,
   Briefcase, GraduationCap, Sparkles, Bot, BarChart3, Brain, Lightbulb,
-  ArrowUpRight,
+  ArrowUpRight, Menu, X, ChevronLeft, ChevronRight, ArrowUp,
 } from "lucide-react";
 import profilePhoto from "@/assets/ankita-profile.jpg";
 import thumbEbt from "@/assets/projects/ebt.jpg";
@@ -73,7 +74,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbOnset,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/1597c430-efb5-4ea5-90b7-6342d89c0f94" },
-          { label: "Deck", href: "https://canva.link/2go3upmujh38yuf" },
+          { label: "Deck", href: "https://drive.google.com/file/d/1ynLe1lZyyFlmFxi1pz6xZxsRBI6Y7WV5/view?usp=sharing" },
         ],
       },
       {
@@ -209,13 +210,19 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "YouTube Video Summary Creator (LangChain RAG Agent)",
         description: "RAG-based agent extracting YouTube transcripts, storing them in a vector database, and answering questions strictly grounded in the video content — engineered to eliminate hallucinations.",
         tech: "LangChain · OpenAI GPT-4 · YouTube Transcript API · Vector DB · Python",
-        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" }],
+        links: [
+          { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" },
+          { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQAk3Vhy11RUQooN5wAE7QslAcPaNTOBKlQEtly9l6Gf8Mk?e=J1O8Ic" },
+        ],
       },
       {
         title: "Multi-Agent RAG Chatbot Collection (LangGraph)",
         description: "Two conversational AI systems — a general-purpose LLM chatbot and a document-grounded RAG assistant — built with LangGraph to demonstrate stateful agent orchestration and private knowledge retrieval.",
         tech: "LangGraph · GPT-4o · FAISS · Python · Jupyter",
-        links: [{ label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-Using-LangGraph" }],
+        links: [
+          { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-Using-LangGraph" },
+          { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBYnSstw6WfSayG4Di0fv1cAVVir5no5SRvuMiYBVV0zfw?e=mBibjI" },
+        ],
       },
     ],
   },
@@ -228,13 +235,13 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "CRED — Product Improvement Case Study",
         description: "Teardown of CRED proposing Spend Analyzer, AI Financial Coach, Financial Stability Score, and predictable gamified rewards to deepen CRED's role as a daily finance companion beyond bill payments.",
         tech: "Product thinking · User segmentation · Prioritization frameworks",
-        links: [{ label: "Deck", href: "https://canva.link/q6mdtnoa4oi40f0" }],
+        links: [{ label: "Deck", href: "https://drive.google.com/file/d/1-uuUZwRhHd0YtLPgWBFh0fLGrDFOtWjP/view?usp=sharing" }],
       },
       {
         title: "YouTube — Product Improvement Case Study",
         description: "Product analysis of YouTube focused on the student learner segment, proposing AI Learning Guide, Focus Learning Mode, and end-of-video Q&A to transform YouTube into a structured, habit-forming learning platform.",
         tech: "Product thinking · User segmentation · Prioritization frameworks",
-        links: [{ label: "Deck", href: "https://canva.link/rgz4hcn7sw6gd6k" }],
+        links: [{ label: "Deck", href: "https://drive.google.com/file/d/16HtddErYW3npb8_NAgNoJ1z_BFFwsS0v/view?usp=sharing" }],
       },
     ],
   },
@@ -266,6 +273,7 @@ function Portfolio() {
         <Contact />
       </main>
       <Footer />
+      <QuickJump />
     </div>
   );
 }
@@ -480,96 +488,266 @@ function Skills() {
 }
 
 function Projects() {
+  const [activeId, setActiveId] = useState(PROJECT_GROUPS[0].id);
+
+  // Sync to URL hash on mount + when hash changes (so Hero chips & QuickJump still work)
+  useEffect(() => {
+    const syncFromHash = () => {
+      const h = window.location.hash.replace("#", "");
+      const match = PROJECT_GROUPS.find((g) => g.id === h);
+      if (match) setActiveId(match.id);
+    };
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
+
+  const activeIndex = PROJECT_GROUPS.findIndex((g) => g.id === activeId);
+  const activeGroup = PROJECT_GROUPS[activeIndex];
+  const ActiveIcon = activeGroup.icon;
+
+  const goTo = (id: string) => {
+    setActiveId(id);
+    if (typeof window !== "undefined") {
+      history.replaceState(null, "", `#${id}`);
+    }
+  };
+
+  const prev = () => goTo(PROJECT_GROUPS[(activeIndex - 1 + PROJECT_GROUPS.length) % PROJECT_GROUPS.length].id);
+  const next = () => goTo(PROJECT_GROUPS[(activeIndex + 1) % PROJECT_GROUPS.length].id);
+
   return (
     <section id="projects" className="border-b border-border bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-20">
         <SectionHeader
           eyebrow="Projects"
           title="Selected work"
-          subtitle="A collection of AI-powered apps, agents, analytics dashboards, and product case studies."
+          subtitle="A collection of AI-powered apps, agents, analytics dashboards, and product case studies. Switch categories below."
         />
-        <div className="space-y-16">
-          {PROJECT_GROUPS.map((group) => {
-            const Icon = group.icon;
-            return (
-              <div key={group.id} id={group.id}>
-                <div className="mb-6 flex items-center gap-3">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                    <Icon className="h-4 w-4" />
+
+        {/* Sticky category tabs */}
+        <div className="sticky top-16 z-30 -mx-6 mb-8 border-y border-border bg-surface/95 px-6 py-3 backdrop-blur">
+          <div className="flex gap-2 overflow-x-auto scrollbar-none">
+            {PROJECT_GROUPS.map((g) => {
+              const Icon = g.icon;
+              const active = g.id === activeId;
+              return (
+                <button
+                  key={g.id}
+                  onClick={() => goTo(g.id)}
+                  className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-medium transition-colors ${
+                    active
+                      ? "border-primary bg-primary text-primary-foreground shadow"
+                      : "border-border bg-card text-foreground hover:border-accent hover:bg-accent/10 hover:text-primary"
+                  }`}
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                  <span className="whitespace-nowrap">{g.title}</span>
+                  <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] ${active ? "bg-primary-foreground/20" : "bg-muted text-muted-foreground"}`}>
+                    {g.items.length}
                   </span>
-                  <h3 className="font-display text-2xl font-semibold text-primary">{group.title}</h3>
-                </div>
-                <div className="grid gap-5 md:grid-cols-2">
-                  {group.items.map((p) => (
-                    <article
-                      key={p.title}
-                      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
-                    >
-                      {p.thumbnail && (
-                        <a
-                          href={p.links[0]?.href}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
-                        >
-                          {group.id === "copilot-agents" || group.id === "powerbi" ? (
-                            <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
-                              <div className="aspect-[16/10] flex items-center justify-center">
-                                <img
-                                  src={p.thumbnail}
-                                  alt={`${p.title} preview`}
-                                  loading="lazy"
-                                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                                />
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
-                              <div className="aspect-[9/19] flex items-center justify-center">
-                                <img
-                                  src={p.thumbnail}
-                                  alt={`${p.title} preview`}
-                                  loading="lazy"
-                                  className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
-                                />
-                              </div>
-                            </div>
-                          )}
-                        </a>
-                      )}
-                      <div className="flex flex-1 flex-col p-6">
-                      <h4 className="font-display text-lg font-semibold leading-snug text-primary">
-                        {p.title}
-                      </h4>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                        {p.description}
-                      </p>
-                      {p.tech && (
-                        <p className="mt-4 text-xs font-medium text-foreground/70">{p.tech}</p>
-                      )}
-                      <div className="mt-5 flex flex-wrap gap-2">
-                        {p.links.map((l) => (
-                          <a
-                            key={l.href}
-                            href={l.href}
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
-                          >
-                            {l.label} <ExternalLink className="h-3 w-3" />
-                          </a>
-                        ))}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div id={activeGroup.id}>
+          <div className="mb-6 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                <ActiveIcon className="h-4 w-4" />
+              </span>
+              <h3 className="font-display text-2xl font-semibold text-primary">{activeGroup.title}</h3>
+            </div>
+            <div className="hidden items-center gap-2 sm:flex">
+              <button onClick={prev} aria-label="Previous category" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-foreground transition-colors hover:border-accent hover:text-primary">
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button onClick={next} aria-label="Next category" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-foreground transition-colors hover:border-accent hover:text-primary">
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {activeGroup.items.map((p) => (
+              <article
+                key={p.title}
+                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
+              >
+                {p.thumbnail && (
+                  <a
+                    href={p.links[0]?.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
+                  >
+                    {activeGroup.id === "copilot-agents" || activeGroup.id === "powerbi" ? (
+                      <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
+                        <div className="aspect-[16/10] flex items-center justify-center">
+                          <img
+                            src={p.thumbnail}
+                            alt={`${p.title} preview`}
+                            loading="lazy"
+                            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </div>
                       </div>
+                    ) : (
+                      <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
+                        <div className="aspect-[9/19] flex items-center justify-center">
+                          <img
+                            src={p.thumbnail}
+                            alt={`${p.title} preview`}
+                            loading="lazy"
+                            className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
+                          />
+                        </div>
                       </div>
-                    </article>
-                  ))}
+                    )}
+                  </a>
+                )}
+                <div className="flex flex-1 flex-col p-6">
+                  <h4 className="font-display text-lg font-semibold leading-snug text-primary">
+                    {p.title}
+                  </h4>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {p.description}
+                  </p>
+                  {p.tech && (
+                    <p className="mt-4 text-xs font-medium text-foreground/70">{p.tech}</p>
+                  )}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {p.links.map((l) => (
+                      <a
+                        key={l.href}
+                        href={l.href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                      >
+                        {l.label} <ExternalLink className="h-3 w-3" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              </article>
+            ))}
+          </div>
+
+          {/* Bottom pager — easy switching after scrolling through cards */}
+          <div className="mt-10 flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4">
+            <button
+              onClick={prev}
+              className="inline-flex flex-1 items-center gap-2 rounded-md px-3 py-2 text-left text-xs font-medium text-foreground transition-colors hover:bg-secondary"
+            >
+              <ChevronLeft className="h-4 w-4 text-accent" />
+              <span className="flex flex-col">
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Previous</span>
+                <span className="truncate">{PROJECT_GROUPS[(activeIndex - 1 + PROJECT_GROUPS.length) % PROJECT_GROUPS.length].title}</span>
+              </span>
+            </button>
+            <button
+              onClick={() => window.scrollTo({ top: document.getElementById("projects")?.offsetTop ?? 0, behavior: "smooth" })}
+              className="hidden shrink-0 rounded-md border border-border px-3 py-2 text-xs font-medium text-muted-foreground hover:text-primary sm:inline-flex"
+            >
+              Back to top
+            </button>
+            <button
+              onClick={next}
+              className="inline-flex flex-1 items-center justify-end gap-2 rounded-md px-3 py-2 text-right text-xs font-medium text-foreground transition-colors hover:bg-secondary"
+            >
+              <span className="flex flex-col items-end">
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next</span>
+                <span className="truncate">{PROJECT_GROUPS[(activeIndex + 1) % PROJECT_GROUPS.length].title}</span>
+              </span>
+              <ChevronRight className="h-4 w-4 text-accent" />
+            </button>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function QuickJump() {
+  const [open, setOpen] = useState(false);
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 600);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const go = (hash: string) => {
+    setOpen(false);
+    if (hash === "#top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      history.replaceState(null, "", " ");
+      return;
+    }
+    window.location.hash = hash;
+  };
+
+  return (
+    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
+      {showTop && !open && (
+        <button
+          onClick={() => go("#top")}
+          aria-label="Back to top"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-lg transition-colors hover:bg-primary hover:text-primary-foreground"
+        >
+          <ArrowUp className="h-4 w-4" />
+        </button>
+      )}
+
+      {open && (
+        <div className="w-72 max-w-[85vw] overflow-hidden rounded-xl border border-border bg-card shadow-2xl">
+          <div className="border-b border-border px-4 py-3">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Sections</p>
+          </div>
+          <div className="flex flex-col py-1">
+            {NAV.map((n) => (
+              <button
+                key={n.href}
+                onClick={() => go(n.href)}
+                className="px-4 py-2 text-left text-sm text-foreground transition-colors hover:bg-secondary"
+              >
+                {n.label}
+              </button>
+            ))}
+          </div>
+          <div className="border-t border-border px-4 py-3">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Project Categories</p>
+          </div>
+          <div className="flex flex-col py-1 pb-2">
+            {PROJECT_GROUPS.map((g) => {
+              const Icon = g.icon;
+              return (
+                <button
+                  key={g.id}
+                  onClick={() => go(`#${g.id}`)}
+                  className="flex items-center gap-2 px-4 py-2 text-left text-sm text-foreground transition-colors hover:bg-secondary"
+                >
+                  <Icon className="h-3.5 w-3.5 text-accent" />
+                  <span className="truncate">{g.title}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-label={open ? "Close quick menu" : "Open quick menu"}
+        className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl ring-1 ring-primary/30 transition-transform hover:scale-105"
+      >
+        {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </button>
+    </div>
   );
 }
 
