@@ -274,32 +274,143 @@ function Portfolio() {
       </main>
       <Footer />
       <QuickJump />
+      <ScrollHint />
+    </div>
+  );
+}
+
+function ScrollHint() {
+  const [show, setShow] = useState(false);
+  const [closed, setClosed] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("scrollHintSeen")) return;
+    const onScroll = () => {
+      if (window.scrollY > 280) {
+        setShow(true);
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const dismiss = () => {
+    setClosed(true);
+    sessionStorage.setItem("scrollHintSeen", "1");
+  };
+
+  useEffect(() => {
+    if (!show || closed) return;
+    const t = setTimeout(dismiss, 9000);
+    return () => clearTimeout(t);
+  }, [show, closed]);
+
+  if (!show || closed) return null;
+
+  return (
+    <div className="fixed left-1/2 top-20 z-[60] w-[min(92vw,420px)] -translate-x-1/2 animate-in fade-in slide-in-from-top-4 duration-500">
+      <div className="relative overflow-hidden rounded-xl border border-accent/40 bg-card p-4 pr-10 shadow-2xl ring-1 ring-accent/20">
+        <div className="flex items-start gap-3">
+          <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+            <Sparkles className="h-4 w-4" />
+          </span>
+          <div className="text-sm leading-relaxed text-foreground">
+            <p className="font-medium text-primary">Quick tip</p>
+            <p className="mt-0.5 text-muted-foreground">
+              Use <span className="font-semibold text-foreground">"Project sections"</span> in the top bar to jump straight to any project category.
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={dismiss}
+          aria-label="Dismiss tip"
+          className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
     </div>
   );
 }
 
 function Header() {
+  const [projOpen, setProjOpen] = useState(false);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (!t.closest("[data-projects-dropdown]")) setProjOpen(false);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
+  const jumpTo = (hash: string) => {
+    setProjOpen(false);
+    window.location.hash = hash;
+  };
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 md:px-6 md:py-4">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 md:px-6 md:py-4">
         <a href="#top" className="font-display text-base font-bold tracking-tight text-primary md:text-lg">
           Ankita Chatterjee
         </a>
-        <nav className="order-3 flex w-full flex-wrap items-center gap-x-4 gap-y-1 text-xs md:order-none md:w-auto md:gap-7 md:text-sm">
+        <nav className="order-3 flex w-full flex-wrap items-center gap-x-3 gap-y-1 text-xs md:order-none md:w-auto md:gap-6 md:text-sm">
           {NAV.map((n) => (
             <a key={n.href} href={n.href} className="text-muted-foreground transition-colors hover:text-foreground">
               {n.label}
             </a>
           ))}
         </nav>
-        <a
-          href="/Ankita_Chatterjee_CV.pdf"
-          download
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90"
-        >
-          <Download className="h-3.5 w-3.5" />
-          Resume
-        </a>
+        <div className="flex items-center gap-2">
+          <div className="relative" data-projects-dropdown>
+            <button
+              onClick={(e) => { e.stopPropagation(); setProjOpen((o) => !o); }}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-2 text-xs font-medium text-foreground transition-colors hover:border-accent hover:text-primary"
+              aria-haspopup="menu"
+              aria-expanded={projOpen}
+            >
+              Project sections
+              <ChevronRight className={`h-3.5 w-3.5 transition-transform ${projOpen ? "rotate-90" : "rotate-90"}`} />
+            </button>
+            {projOpen && (
+              <div className="absolute right-0 mt-2 w-64 overflow-hidden rounded-lg border border-border bg-card shadow-xl">
+                <div className="border-b border-border px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Jump to a project category
+                </div>
+                <div className="flex flex-col py-1">
+                  {PROJECT_GROUPS.map((g) => {
+                    const Icon = g.icon;
+                    return (
+                      <button
+                        key={g.id}
+                        onClick={() => jumpTo(`#${g.id}`)}
+                        className="flex items-center gap-2 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-secondary"
+                      >
+                        <Icon className="h-3.5 w-3.5 shrink-0 text-accent" />
+                        <span className="truncate">{g.title}</span>
+                        <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                          {g.items.length}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+          <a
+            href="/Ankita_Chatterjee_CV.pdf"
+            download
+            className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90 md:px-4"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Resume
+          </a>
+        </div>
       </div>
     </header>
   );
@@ -525,32 +636,8 @@ function Projects() {
           subtitle="A collection of AI-powered apps, agents, analytics dashboards, and product case studies. Switch categories below."
         />
 
-        {/* Sticky category tabs */}
-        <div className="-mx-6 mb-8 border-y border-border bg-surface px-6 py-3">
-          <div className="flex gap-2 overflow-x-auto scrollbar-none">
-            {PROJECT_GROUPS.map((g) => {
-              const Icon = g.icon;
-              const active = g.id === activeId;
-              return (
-                <button
-                  key={g.id}
-                  onClick={() => goTo(g.id)}
-                  className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-medium transition-colors ${
-                    active
-                      ? "border-primary bg-primary text-primary-foreground shadow"
-                      : "border-border bg-card text-foreground hover:border-accent hover:bg-accent/10 hover:text-primary"
-                  }`}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                  <span className="whitespace-nowrap">{g.title}</span>
-                  <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] ${active ? "bg-primary-foreground/20" : "bg-muted text-muted-foreground"}`}>
-                    {g.items.length}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        {/* Category switcher lives in the top bar dropdown ("Project sections") */}
+
 
         <div id={activeGroup.id}>
           <div className="mb-6 flex items-center justify-between gap-3">
