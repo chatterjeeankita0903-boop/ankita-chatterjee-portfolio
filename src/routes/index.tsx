@@ -579,32 +579,8 @@ function Projects() {
           subtitle="A collection of AI-powered apps, agents, analytics dashboards, and product case studies. Switch categories below."
         />
 
-        {/* Sticky category tabs */}
-        <div className="-mx-6 mb-8 border-y border-border bg-surface px-6 py-3">
-          <div className="flex gap-2 overflow-x-auto scrollbar-none">
-            {PROJECT_GROUPS.map((g) => {
-              const Icon = g.icon;
-              const active = g.id === activeId;
-              return (
-                <button
-                  key={g.id}
-                  onClick={() => goTo(g.id)}
-                  className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-medium transition-colors ${
-                    active
-                      ? "border-primary bg-primary text-primary-foreground shadow"
-                      : "border-border bg-card text-foreground hover:border-accent hover:bg-accent/10 hover:text-primary"
-                  }`}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                  <span className="whitespace-nowrap">{g.title}</span>
-                  <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] ${active ? "bg-primary-foreground/20" : "bg-muted text-muted-foreground"}`}>
-                    {g.items.length}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        {/* Category switcher lives in the top bar dropdown ("Project sections") */}
+
 
         <div id={activeGroup.id}>
           <div className="mb-6 flex items-center justify-between gap-3">
