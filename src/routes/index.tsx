@@ -73,7 +73,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbOnset,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/1597c430-efb5-4ea5-90b7-6342d89c0f94" },
-          { label: "Deck", href: "https://canva.link/2go3upmujh38yuf" },
+          { label: "Deck", href: "https://drive.google.com/file/d/1ynLe1lZyyFlmFxi1pz6xZxsRBI6Y7WV5/view?usp=sharing" },
         ],
       },
       {
