@@ -273,6 +273,7 @@ function Portfolio() {
         <Contact />
       </main>
       <Footer />
+      <QuickJump />
     </div>
   );
 }
