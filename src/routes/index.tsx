@@ -281,11 +281,11 @@ function Portfolio() {
 function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="font-display text-lg font-bold tracking-tight text-primary">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 md:px-6 md:py-4">
+        <a href="#top" className="font-display text-base font-bold tracking-tight text-primary md:text-lg">
           Ankita Chatterjee
         </a>
-        <nav className="hidden items-center gap-7 text-sm md:flex">
+        <nav className="order-3 flex w-full flex-wrap items-center gap-x-4 gap-y-1 text-xs md:order-none md:w-auto md:gap-7 md:text-sm">
           {NAV.map((n) => (
             <a key={n.href} href={n.href} className="text-muted-foreground transition-colors hover:text-foreground">
               {n.label}
@@ -526,7 +526,7 @@ function Projects() {
         />
 
         {/* Sticky category tabs */}
-        <div className="sticky top-16 z-30 -mx-6 mb-8 border-y border-border bg-surface/95 px-6 py-3 backdrop-blur">
+        <div className="-mx-6 mb-8 border-y border-border bg-surface px-6 py-3">
           <div className="flex gap-2 overflow-x-auto scrollbar-none">
             {PROJECT_GROUPS.map((g) => {
               const Icon = g.icon;
