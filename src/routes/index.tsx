@@ -279,27 +279,81 @@ function Portfolio() {
 }
 
 function Header() {
+  const [projOpen, setProjOpen] = useState(false);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (!t.closest("[data-projects-dropdown]")) setProjOpen(false);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
+  const jumpTo = (hash: string) => {
+    setProjOpen(false);
+    window.location.hash = hash;
+  };
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 md:px-6 md:py-4">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 md:px-6 md:py-4">
         <a href="#top" className="font-display text-base font-bold tracking-tight text-primary md:text-lg">
           Ankita Chatterjee
         </a>
-        <nav className="order-3 flex w-full flex-wrap items-center gap-x-4 gap-y-1 text-xs md:order-none md:w-auto md:gap-7 md:text-sm">
+        <nav className="order-3 flex w-full flex-wrap items-center gap-x-3 gap-y-1 text-xs md:order-none md:w-auto md:gap-6 md:text-sm">
           {NAV.map((n) => (
             <a key={n.href} href={n.href} className="text-muted-foreground transition-colors hover:text-foreground">
               {n.label}
             </a>
           ))}
         </nav>
-        <a
-          href="/Ankita_Chatterjee_CV.pdf"
-          download
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90"
-        >
-          <Download className="h-3.5 w-3.5" />
-          Resume
-        </a>
+        <div className="flex items-center gap-2">
+          <div className="relative" data-projects-dropdown>
+            <button
+              onClick={(e) => { e.stopPropagation(); setProjOpen((o) => !o); }}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-2 text-xs font-medium text-foreground transition-colors hover:border-accent hover:text-primary"
+              aria-haspopup="menu"
+              aria-expanded={projOpen}
+            >
+              Project sections
+              <ChevronRight className={`h-3.5 w-3.5 transition-transform ${projOpen ? "rotate-90" : "rotate-90"}`} />
+            </button>
+            {projOpen && (
+              <div className="absolute right-0 mt-2 w-64 overflow-hidden rounded-lg border border-border bg-card shadow-xl">
+                <div className="border-b border-border px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Jump to a project category
+                </div>
+                <div className="flex flex-col py-1">
+                  {PROJECT_GROUPS.map((g) => {
+                    const Icon = g.icon;
+                    return (
+                      <button
+                        key={g.id}
+                        onClick={() => jumpTo(`#${g.id}`)}
+                        className="flex items-center gap-2 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-secondary"
+                      >
+                        <Icon className="h-3.5 w-3.5 shrink-0 text-accent" />
+                        <span className="truncate">{g.title}</span>
+                        <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                          {g.items.length}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+          <a
+            href="/Ankita_Chatterjee_CV.pdf"
+            download
+            className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90 md:px-4"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Resume
+          </a>
+        </div>
       </div>
     </header>
   );
