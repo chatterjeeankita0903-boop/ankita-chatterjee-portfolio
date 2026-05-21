@@ -526,7 +526,7 @@ function Projects() {
         />
 
         {/* Sticky category tabs */}
-        <div className="sticky top-16 z-30 -mx-6 mb-8 border-y border-border bg-surface/95 px-6 py-3 backdrop-blur">
+        <div className="-mx-6 mb-8 border-y border-border bg-surface px-6 py-3">
           <div className="flex gap-2 overflow-x-auto scrollbar-none">
             {PROJECT_GROUPS.map((g) => {
               const Icon = g.icon;
