@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Mail, Phone, MapPin, Github, Linkedin, Download, ExternalLink,
   Briefcase, GraduationCap, Sparkles, Bot, BarChart3, Brain, Lightbulb,
@@ -262,9 +262,10 @@ const SKILLS = {
 };
 
 function Portfolio() {
+  const projButtonRef = useRef<HTMLButtonElement>(null);
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
+      <Header projButtonRef={projButtonRef} />
       <main>
         <Hero />
         <About />
@@ -275,12 +276,12 @@ function Portfolio() {
       </main>
       <Footer />
       <QuickJump />
-      <ScrollHint />
+      <ScrollHint targetRef={projButtonRef} />
     </div>
   );
 }
 
-function ScrollHint() {
+function ScrollHint({ targetRef }: { targetRef: React.RefObject<HTMLButtonElement | null> }) {
   const [show, setShow] = useState(false);
   const [closed, setClosed] = useState(false);
 
@@ -297,21 +298,59 @@ function ScrollHint() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const dismiss = () => {
-    setClosed(true);
-    sessionStorage.setItem("scrollHintSeen", "1");
-  };
-
   useEffect(() => {
     if (!show || closed) return;
-    const t = setTimeout(dismiss, 9000);
+    const t = setTimeout(() => {
+      setClosed(true);
+      sessionStorage.setItem("scrollHintSeen", "1");
+    }, 9000);
     return () => clearTimeout(t);
   }, [show, closed]);
 
   if (!show || closed) return null;
 
+  const target = targetRef?.current;
+  const isVisible = target && target.offsetParent !== null;
+
+  if (isVisible) {
+    const rect = target.getBoundingClientRect();
+    const left = rect.left + rect.width / 2;
+    const top = rect.bottom + 12;
+    return (
+      <div
+        className="fixed z-[60] animate-in fade-in slide-in-from-top-2 duration-500"
+        style={{ left, top, transform: "translateX(-50%)" }}
+      >
+        <div className="relative w-[min(90vw,320px)] rounded-xl border border-accent/40 bg-card p-4 pr-10 shadow-2xl ring-1 ring-accent/20">
+          <div className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-l border-t border-accent/40 bg-card" />
+          <div className="flex items-start gap-3">
+            <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+              <Sparkles className="h-4 w-4" />
+            </span>
+            <div className="text-sm leading-relaxed text-foreground">
+              <p className="font-medium text-primary">Quick tip</p>
+              <p className="mt-0.5 text-muted-foreground">
+                Click here to navigate to different project sections
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              setClosed(true);
+              sessionStorage.setItem("scrollHintSeen", "1");
+            }}
+            aria-label="Dismiss tip"
+            className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="fixed left-1/2 top-20 z-[60] w-[min(92vw,420px)] -translate-x-1/2 animate-in fade-in slide-in-from-top-4 duration-500">
+    <div className="fixed left-1/2 top-20 z-[60] w-[min(92vw,360px)] -translate-x-1/2 animate-in fade-in slide-in-from-top-4 duration-500">
       <div className="relative overflow-hidden rounded-xl border border-accent/40 bg-card p-4 pr-10 shadow-2xl ring-1 ring-accent/20">
         <div className="flex items-start gap-3">
           <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
@@ -320,12 +359,15 @@ function ScrollHint() {
           <div className="text-sm leading-relaxed text-foreground">
             <p className="font-medium text-primary">Quick tip</p>
             <p className="mt-0.5 text-muted-foreground">
-              Use <span className="font-semibold text-foreground">"Project sections"</span> in the top bar to jump straight to any project category.
+              Open the menu to navigate to different project sections
             </p>
           </div>
         </div>
         <button
-          onClick={dismiss}
+          onClick={() => {
+            setClosed(true);
+            sessionStorage.setItem("scrollHintSeen", "1");
+          }}
           aria-label="Dismiss tip"
           className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
         >
@@ -336,7 +378,7 @@ function ScrollHint() {
   );
 }
 
-function Header() {
+function Header({ projButtonRef }: { projButtonRef: React.RefObject<HTMLButtonElement | null> }) {
   const [projOpen, setProjOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProjOpen, setMobileProjOpen] = useState(false);
@@ -360,6 +402,7 @@ function Header() {
   const ProjectsDropdown = ({ id }: { id?: string }) => (
     <div className="relative" data-projects-dropdown>
       <button
+        ref={projButtonRef}
         onClick={(e) => { e.stopPropagation(); setProjOpen((o) => !o); }}
         className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground data-[open=true]:text-foreground"
         data-open={projOpen}
