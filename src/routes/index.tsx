@@ -30,9 +30,10 @@ const NAV = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
+  { label: "Projects", href: "#projects", isProjects: true },
   { label: "Contact", href: "#contact" },
 ];
+
 
 type Project = {
   title: string;
