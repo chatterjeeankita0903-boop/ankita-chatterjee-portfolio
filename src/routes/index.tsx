@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Mail, Phone, MapPin, Github, Linkedin, Download, ExternalLink,
   Briefcase, GraduationCap, Sparkles, Bot, BarChart3, Brain, Lightbulb,
