@@ -677,163 +677,100 @@ function Skills() {
 }
 
 function Projects() {
-  const [activeId, setActiveId] = useState(PROJECT_GROUPS[0].id);
-
-  // Sync to URL hash on mount + when hash changes (so Hero chips & QuickJump still work)
-  useEffect(() => {
-    const syncFromHash = () => {
-      const h = window.location.hash.replace("#", "");
-      const match = PROJECT_GROUPS.find((g) => g.id === h);
-      if (match) setActiveId(match.id);
-    };
-    syncFromHash();
-    window.addEventListener("hashchange", syncFromHash);
-    return () => window.removeEventListener("hashchange", syncFromHash);
-  }, []);
-
-  const activeIndex = PROJECT_GROUPS.findIndex((g) => g.id === activeId);
-  const activeGroup = PROJECT_GROUPS[activeIndex];
-  const ActiveIcon = activeGroup.icon;
-
-  const goTo = (id: string) => {
-    setActiveId(id);
-    if (typeof window !== "undefined") {
-      history.replaceState(null, "", `#${id}`);
-    }
-  };
-
-  const prev = () => goTo(PROJECT_GROUPS[(activeIndex - 1 + PROJECT_GROUPS.length) % PROJECT_GROUPS.length].id);
-  const next = () => goTo(PROJECT_GROUPS[(activeIndex + 1) % PROJECT_GROUPS.length].id);
-
   return (
     <section id="projects" className="border-b border-border bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-20">
         <SectionHeader
           eyebrow="Projects"
           title="Selected work"
-          subtitle="A collection of AI-powered apps, agents, analytics dashboards, and product case studies. Switch categories below."
+          subtitle="A collection of AI-powered apps, agents, analytics dashboards, and product case studies. Use the Projects menu in the top bar to jump to any category."
         />
 
-        {/* Category switcher lives in the top bar dropdown ("Project sections") */}
-
-
-        <div id={activeGroup.id}>
-          <div className="mb-6 flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                <ActiveIcon className="h-4 w-4" />
-              </span>
-              <h3 className="font-display text-2xl font-semibold text-primary">{activeGroup.title}</h3>
-            </div>
-            <div className="hidden items-center gap-2 sm:flex">
-              <button onClick={prev} aria-label="Previous category" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-foreground transition-colors hover:border-accent hover:text-primary">
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button onClick={next} aria-label="Next category" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-foreground transition-colors hover:border-accent hover:text-primary">
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2">
-            {activeGroup.items.map((p) => (
-              <article
-                key={p.title}
-                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
-              >
-                {p.thumbnail && (
-                  <a
-                    href={p.links[0]?.href}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
-                  >
-                    {activeGroup.id === "copilot-agents" || activeGroup.id === "powerbi" ? (
-                      <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
-                        <div className="aspect-[16/10] flex items-center justify-center">
-                          <img
-                            src={p.thumbnail}
-                            alt={`${p.title} preview`}
-                            loading="lazy"
-                            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
-                        <div className="aspect-[9/19] flex items-center justify-center">
-                          <img
-                            src={p.thumbnail}
-                            alt={`${p.title} preview`}
-                            loading="lazy"
-                            className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </a>
-                )}
-                <div className="flex flex-1 flex-col p-6">
-                  <h4 className="font-display text-lg font-semibold leading-snug text-primary">
-                    {p.title}
-                  </h4>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {p.description}
-                  </p>
-                  {p.tech && (
-                    <p className="mt-4 text-xs font-medium text-foreground/70">{p.tech}</p>
-                  )}
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {p.links.map((l) => (
-                      <a
-                        key={l.href}
-                        href={l.href}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
-                      >
-                        {l.label} <ExternalLink className="h-3 w-3" />
-                      </a>
-                    ))}
-                  </div>
+        <div className="space-y-20">
+          {PROJECT_GROUPS.map((group) => {
+            const Icon = group.icon;
+            return (
+              <div key={group.id} id={group.id} className="scroll-mt-24">
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <h3 className="font-display text-2xl font-semibold text-primary">{group.title}</h3>
                 </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Bottom pager — easy switching after scrolling through cards */}
-          <div className="mt-10 flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4">
-            <button
-              onClick={prev}
-              className="inline-flex flex-1 items-center gap-2 rounded-md px-3 py-2 text-left text-xs font-medium text-foreground transition-colors hover:bg-secondary"
-            >
-              <ChevronLeft className="h-4 w-4 text-accent" />
-              <span className="flex flex-col">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Previous</span>
-                <span className="truncate">{PROJECT_GROUPS[(activeIndex - 1 + PROJECT_GROUPS.length) % PROJECT_GROUPS.length].title}</span>
-              </span>
-            </button>
-            <button
-              onClick={() => window.scrollTo({ top: document.getElementById("projects")?.offsetTop ?? 0, behavior: "smooth" })}
-              className="hidden shrink-0 rounded-md border border-border px-3 py-2 text-xs font-medium text-muted-foreground hover:text-primary sm:inline-flex"
-            >
-              Back to top
-            </button>
-            <button
-              onClick={next}
-              className="inline-flex flex-1 items-center justify-end gap-2 rounded-md px-3 py-2 text-right text-xs font-medium text-foreground transition-colors hover:bg-secondary"
-            >
-              <span className="flex flex-col items-end">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next</span>
-                <span className="truncate">{PROJECT_GROUPS[(activeIndex + 1) % PROJECT_GROUPS.length].title}</span>
-              </span>
-              <ChevronRight className="h-4 w-4 text-accent" />
-            </button>
-          </div>
+                <div className="grid gap-5 md:grid-cols-2">
+                  {group.items.map((p) => (
+                    <article
+                      key={p.title}
+                      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
+                    >
+                      {p.thumbnail && (
+                        <a
+                          href={p.links[0]?.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
+                        >
+                          {group.id === "copilot-agents" || group.id === "powerbi" ? (
+                            <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
+                              <div className="aspect-[16/10] flex items-center justify-center">
+                                <img
+                                  src={p.thumbnail}
+                                  alt={`${p.title} preview`}
+                                  loading="lazy"
+                                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
+                              <div className="aspect-[9/19] flex items-center justify-center">
+                                <img
+                                  src={p.thumbnail}
+                                  alt={`${p.title} preview`}
+                                  loading="lazy"
+                                  className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </a>
+                      )}
+                      <div className="flex flex-1 flex-col p-6">
+                        <h4 className="font-display text-lg font-semibold leading-snug text-primary">
+                          {p.title}
+                        </h4>
+                        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                          {p.description}
+                        </p>
+                        {p.tech && (
+                          <p className="mt-4 text-xs font-medium text-foreground/70">{p.tech}</p>
+                        )}
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {p.links.map((l) => (
+                            <a
+                              key={l.href}
+                              href={l.href}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                            >
+                              {l.label} <ExternalLink className="h-3 w-3" />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
+
 
 function QuickJump() {
   const [open, setOpen] = useState(false);
