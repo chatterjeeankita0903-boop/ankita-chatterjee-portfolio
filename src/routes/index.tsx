@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
   Mail, Phone, MapPin, Github, Linkedin, Download, ExternalLink,
   Briefcase, GraduationCap, Sparkles, Bot, BarChart3, Brain, Lightbulb,
-  ArrowUpRight, Menu, X, ChevronLeft, ChevronRight, ArrowUp,
+  ArrowUpRight, Menu, X, ChevronRight, ArrowUp,
 } from "lucide-react";
 import profilePhoto from "@/assets/ankita-profile.jpg";
 import thumbEbt from "@/assets/projects/ebt.jpg";
@@ -30,9 +30,10 @@ const NAV = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
+  { label: "Projects", href: "#projects", isProjects: true },
   { label: "Contact", href: "#contact" },
 ];
+
 
 type Project = {
   title: string;
@@ -337,6 +338,8 @@ function ScrollHint() {
 
 function Header() {
   const [projOpen, setProjOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileProjOpen, setMobileProjOpen] = useState(false);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -349,72 +352,147 @@ function Header() {
 
   const jumpTo = (hash: string) => {
     setProjOpen(false);
+    setMobileOpen(false);
+    setMobileProjOpen(false);
     window.location.hash = hash;
   };
 
+  const ProjectsDropdown = ({ id }: { id?: string }) => (
+    <div className="relative" data-projects-dropdown>
+      <button
+        onClick={(e) => { e.stopPropagation(); setProjOpen((o) => !o); }}
+        className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground data-[open=true]:text-foreground"
+        data-open={projOpen}
+        aria-haspopup="menu"
+        aria-expanded={projOpen}
+        id={id}
+      >
+        Projects
+        <ChevronRight className={`h-3 w-3 transition-transform ${projOpen ? "rotate-[270deg]" : "rotate-90"}`} />
+      </button>
+      {projOpen && (
+        <div className="absolute right-0 left-auto mt-2 w-64 overflow-hidden rounded-lg border border-border bg-card shadow-xl">
+          <button
+            onClick={() => jumpTo("#projects")}
+            className="flex w-full items-center gap-2 border-b border-border px-3 py-2 text-left text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-secondary hover:text-foreground"
+          >
+            All projects
+          </button>
+          <div className="flex flex-col py-1">
+            {PROJECT_GROUPS.map((g) => {
+              const Icon = g.icon;
+              return (
+                <button
+                  key={g.id}
+                  onClick={() => jumpTo(`#${g.id}`)}
+                  className="flex items-center gap-2 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-secondary"
+                >
+                  <Icon className="h-3.5 w-3.5 shrink-0 text-accent" />
+                  <span className="truncate">{g.title}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 md:px-6 md:py-4">
-        <a href="#top" className="font-display text-base font-bold tracking-tight text-primary md:text-lg">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-4 md:px-6 md:py-4">
+        <a href="#top" className="truncate font-display text-sm font-bold tracking-tight text-primary sm:text-base md:text-lg">
           Ankita Chatterjee
         </a>
-        <nav className="order-3 flex w-full flex-wrap items-center gap-x-3 gap-y-1 text-xs md:order-none md:w-auto md:gap-6 md:text-sm">
-          {NAV.map((n) => (
-            <a key={n.href} href={n.href} className="text-muted-foreground transition-colors hover:text-foreground">
-              {n.label}
-            </a>
-          ))}
+
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-5 text-sm md:flex">
+          {NAV.map((n) =>
+            n.isProjects ? <ProjectsDropdown key={n.href} /> : (
+              <a key={n.href} href={n.href} className="text-muted-foreground transition-colors hover:text-foreground">
+                {n.label}
+              </a>
+            )
+          )}
         </nav>
+
         <div className="flex items-center gap-2">
-          <div className="relative" data-projects-dropdown>
-            <button
-              onClick={(e) => { e.stopPropagation(); setProjOpen((o) => !o); }}
-              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-2 text-xs font-medium text-foreground transition-colors hover:border-accent hover:text-primary"
-              aria-haspopup="menu"
-              aria-expanded={projOpen}
-            >
-              Project sections
-              <ChevronRight className={`h-3.5 w-3.5 transition-transform ${projOpen ? "rotate-90" : "rotate-90"}`} />
-            </button>
-            {projOpen && (
-              <div className="absolute right-0 mt-2 w-64 overflow-hidden rounded-lg border border-border bg-card shadow-xl">
-                <div className="border-b border-border px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  Jump to a project category
-                </div>
-                <div className="flex flex-col py-1">
-                  {PROJECT_GROUPS.map((g) => {
-                    const Icon = g.icon;
-                    return (
-                      <button
-                        key={g.id}
-                        onClick={() => jumpTo(`#${g.id}`)}
-                        className="flex items-center gap-2 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-secondary"
-                      >
-                        <Icon className="h-3.5 w-3.5 shrink-0 text-accent" />
-                        <span className="truncate">{g.title}</span>
-                        <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                          {g.items.length}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
           <a
             href="/Ankita_Chatterjee_CV.pdf"
             download
-            className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90 md:px-4"
+            className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1.5 text-[11px] font-medium text-primary-foreground transition-opacity hover:opacity-90 sm:px-3 sm:py-2 sm:text-xs md:px-4"
           >
-            <Download className="h-3.5 w-3.5" />
+            <Download className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
             Resume
           </a>
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-foreground md:hidden"
+          >
+            {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile nav panel */}
+      {mobileOpen && (
+        <div className="border-t border-border bg-background md:hidden">
+          <nav className="mx-auto flex max-w-6xl flex-col px-3 py-2 text-sm">
+            {NAV.map((n) =>
+              n.isProjects ? (
+                <div key={n.href} className="border-t border-border/60 first:border-t-0">
+                  <button
+                    onClick={() => setMobileProjOpen((o) => !o)}
+                    className="flex w-full items-center justify-between py-2.5 text-left text-foreground"
+                    aria-expanded={mobileProjOpen}
+                  >
+                    <span>Projects</span>
+                    <ChevronRight className={`h-4 w-4 transition-transform ${mobileProjOpen ? "rotate-90" : ""}`} />
+                  </button>
+                  {mobileProjOpen && (
+                    <div className="mb-2 flex flex-col rounded-md border border-border bg-card">
+                      <button
+                        onClick={() => jumpTo("#projects")}
+                        className="border-b border-border px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-secondary"
+                      >
+                        All projects
+                      </button>
+                      {PROJECT_GROUPS.map((g) => {
+                        const Icon = g.icon;
+                        return (
+                          <button
+                            key={g.id}
+                            onClick={() => jumpTo(`#${g.id}`)}
+                            className="flex items-center gap-2 px-3 py-2 text-left text-sm text-foreground hover:bg-secondary"
+                          >
+                            <Icon className="h-3.5 w-3.5 shrink-0 text-accent" />
+                            <span>{g.title}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <a
+                  key={n.href}
+                  href={n.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="border-t border-border/60 py-2.5 text-foreground first:border-t-0"
+                >
+                  {n.label}
+                </a>
+              )
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
+
 
 function Hero() {
   return (
@@ -599,163 +677,100 @@ function Skills() {
 }
 
 function Projects() {
-  const [activeId, setActiveId] = useState(PROJECT_GROUPS[0].id);
-
-  // Sync to URL hash on mount + when hash changes (so Hero chips & QuickJump still work)
-  useEffect(() => {
-    const syncFromHash = () => {
-      const h = window.location.hash.replace("#", "");
-      const match = PROJECT_GROUPS.find((g) => g.id === h);
-      if (match) setActiveId(match.id);
-    };
-    syncFromHash();
-    window.addEventListener("hashchange", syncFromHash);
-    return () => window.removeEventListener("hashchange", syncFromHash);
-  }, []);
-
-  const activeIndex = PROJECT_GROUPS.findIndex((g) => g.id === activeId);
-  const activeGroup = PROJECT_GROUPS[activeIndex];
-  const ActiveIcon = activeGroup.icon;
-
-  const goTo = (id: string) => {
-    setActiveId(id);
-    if (typeof window !== "undefined") {
-      history.replaceState(null, "", `#${id}`);
-    }
-  };
-
-  const prev = () => goTo(PROJECT_GROUPS[(activeIndex - 1 + PROJECT_GROUPS.length) % PROJECT_GROUPS.length].id);
-  const next = () => goTo(PROJECT_GROUPS[(activeIndex + 1) % PROJECT_GROUPS.length].id);
-
   return (
     <section id="projects" className="border-b border-border bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-20">
         <SectionHeader
           eyebrow="Projects"
           title="Selected work"
-          subtitle="A collection of AI-powered apps, agents, analytics dashboards, and product case studies. Switch categories below."
+          subtitle="A collection of AI-powered apps, agents, analytics dashboards, and product case studies. Use the Projects menu in the top bar to jump to any category."
         />
 
-        {/* Category switcher lives in the top bar dropdown ("Project sections") */}
-
-
-        <div id={activeGroup.id}>
-          <div className="mb-6 flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                <ActiveIcon className="h-4 w-4" />
-              </span>
-              <h3 className="font-display text-2xl font-semibold text-primary">{activeGroup.title}</h3>
-            </div>
-            <div className="hidden items-center gap-2 sm:flex">
-              <button onClick={prev} aria-label="Previous category" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-foreground transition-colors hover:border-accent hover:text-primary">
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button onClick={next} aria-label="Next category" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-foreground transition-colors hover:border-accent hover:text-primary">
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2">
-            {activeGroup.items.map((p) => (
-              <article
-                key={p.title}
-                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
-              >
-                {p.thumbnail && (
-                  <a
-                    href={p.links[0]?.href}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
-                  >
-                    {activeGroup.id === "copilot-agents" || activeGroup.id === "powerbi" ? (
-                      <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
-                        <div className="aspect-[16/10] flex items-center justify-center">
-                          <img
-                            src={p.thumbnail}
-                            alt={`${p.title} preview`}
-                            loading="lazy"
-                            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
-                        <div className="aspect-[9/19] flex items-center justify-center">
-                          <img
-                            src={p.thumbnail}
-                            alt={`${p.title} preview`}
-                            loading="lazy"
-                            className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </a>
-                )}
-                <div className="flex flex-1 flex-col p-6">
-                  <h4 className="font-display text-lg font-semibold leading-snug text-primary">
-                    {p.title}
-                  </h4>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {p.description}
-                  </p>
-                  {p.tech && (
-                    <p className="mt-4 text-xs font-medium text-foreground/70">{p.tech}</p>
-                  )}
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {p.links.map((l) => (
-                      <a
-                        key={l.href}
-                        href={l.href}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
-                      >
-                        {l.label} <ExternalLink className="h-3 w-3" />
-                      </a>
-                    ))}
-                  </div>
+        <div className="space-y-20">
+          {PROJECT_GROUPS.map((group) => {
+            const Icon = group.icon;
+            return (
+              <div key={group.id} id={group.id} className="scroll-mt-24">
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <h3 className="font-display text-2xl font-semibold text-primary">{group.title}</h3>
                 </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Bottom pager — easy switching after scrolling through cards */}
-          <div className="mt-10 flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4">
-            <button
-              onClick={prev}
-              className="inline-flex flex-1 items-center gap-2 rounded-md px-3 py-2 text-left text-xs font-medium text-foreground transition-colors hover:bg-secondary"
-            >
-              <ChevronLeft className="h-4 w-4 text-accent" />
-              <span className="flex flex-col">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Previous</span>
-                <span className="truncate">{PROJECT_GROUPS[(activeIndex - 1 + PROJECT_GROUPS.length) % PROJECT_GROUPS.length].title}</span>
-              </span>
-            </button>
-            <button
-              onClick={() => window.scrollTo({ top: document.getElementById("projects")?.offsetTop ?? 0, behavior: "smooth" })}
-              className="hidden shrink-0 rounded-md border border-border px-3 py-2 text-xs font-medium text-muted-foreground hover:text-primary sm:inline-flex"
-            >
-              Back to top
-            </button>
-            <button
-              onClick={next}
-              className="inline-flex flex-1 items-center justify-end gap-2 rounded-md px-3 py-2 text-right text-xs font-medium text-foreground transition-colors hover:bg-secondary"
-            >
-              <span className="flex flex-col items-end">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next</span>
-                <span className="truncate">{PROJECT_GROUPS[(activeIndex + 1) % PROJECT_GROUPS.length].title}</span>
-              </span>
-              <ChevronRight className="h-4 w-4 text-accent" />
-            </button>
-          </div>
+                <div className="grid gap-5 md:grid-cols-2">
+                  {group.items.map((p) => (
+                    <article
+                      key={p.title}
+                      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
+                    >
+                      {p.thumbnail && (
+                        <a
+                          href={p.links[0]?.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
+                        >
+                          {group.id === "copilot-agents" || group.id === "powerbi" ? (
+                            <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
+                              <div className="aspect-[16/10] flex items-center justify-center">
+                                <img
+                                  src={p.thumbnail}
+                                  alt={`${p.title} preview`}
+                                  loading="lazy"
+                                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
+                              <div className="aspect-[9/19] flex items-center justify-center">
+                                <img
+                                  src={p.thumbnail}
+                                  alt={`${p.title} preview`}
+                                  loading="lazy"
+                                  className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </a>
+                      )}
+                      <div className="flex flex-1 flex-col p-6">
+                        <h4 className="font-display text-lg font-semibold leading-snug text-primary">
+                          {p.title}
+                        </h4>
+                        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                          {p.description}
+                        </p>
+                        {p.tech && (
+                          <p className="mt-4 text-xs font-medium text-foreground/70">{p.tech}</p>
+                        )}
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {p.links.map((l) => (
+                            <a
+                              key={l.href}
+                              href={l.href}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                            >
+                              {l.label} <ExternalLink className="h-3 w-3" />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
+
 
 function QuickJump() {
   const [open, setOpen] = useState(false);
