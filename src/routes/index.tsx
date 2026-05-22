@@ -338,6 +338,8 @@ function ScrollHint() {
 
 function Header() {
   const [projOpen, setProjOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileProjOpen, setMobileProjOpen] = useState(false);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -350,72 +352,147 @@ function Header() {
 
   const jumpTo = (hash: string) => {
     setProjOpen(false);
+    setMobileOpen(false);
+    setMobileProjOpen(false);
     window.location.hash = hash;
   };
 
+  const ProjectsDropdown = ({ id }: { id?: string }) => (
+    <div className="relative" data-projects-dropdown>
+      <button
+        onClick={(e) => { e.stopPropagation(); setProjOpen((o) => !o); }}
+        className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground data-[open=true]:text-foreground"
+        data-open={projOpen}
+        aria-haspopup="menu"
+        aria-expanded={projOpen}
+        id={id}
+      >
+        Projects
+        <ChevronRight className={`h-3 w-3 transition-transform ${projOpen ? "rotate-[270deg]" : "rotate-90"}`} />
+      </button>
+      {projOpen && (
+        <div className="absolute right-0 left-auto mt-2 w-64 overflow-hidden rounded-lg border border-border bg-card shadow-xl">
+          <button
+            onClick={() => jumpTo("#projects")}
+            className="flex w-full items-center gap-2 border-b border-border px-3 py-2 text-left text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-secondary hover:text-foreground"
+          >
+            All projects
+          </button>
+          <div className="flex flex-col py-1">
+            {PROJECT_GROUPS.map((g) => {
+              const Icon = g.icon;
+              return (
+                <button
+                  key={g.id}
+                  onClick={() => jumpTo(`#${g.id}`)}
+                  className="flex items-center gap-2 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-secondary"
+                >
+                  <Icon className="h-3.5 w-3.5 shrink-0 text-accent" />
+                  <span className="truncate">{g.title}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 md:px-6 md:py-4">
-        <a href="#top" className="font-display text-base font-bold tracking-tight text-primary md:text-lg">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-4 md:px-6 md:py-4">
+        <a href="#top" className="truncate font-display text-sm font-bold tracking-tight text-primary sm:text-base md:text-lg">
           Ankita Chatterjee
         </a>
-        <nav className="order-3 flex w-full flex-wrap items-center gap-x-3 gap-y-1 text-xs md:order-none md:w-auto md:gap-6 md:text-sm">
-          {NAV.map((n) => (
-            <a key={n.href} href={n.href} className="text-muted-foreground transition-colors hover:text-foreground">
-              {n.label}
-            </a>
-          ))}
+
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-5 text-sm md:flex">
+          {NAV.map((n) =>
+            n.isProjects ? <ProjectsDropdown key={n.href} /> : (
+              <a key={n.href} href={n.href} className="text-muted-foreground transition-colors hover:text-foreground">
+                {n.label}
+              </a>
+            )
+          )}
         </nav>
+
         <div className="flex items-center gap-2">
-          <div className="relative" data-projects-dropdown>
-            <button
-              onClick={(e) => { e.stopPropagation(); setProjOpen((o) => !o); }}
-              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-2 text-xs font-medium text-foreground transition-colors hover:border-accent hover:text-primary"
-              aria-haspopup="menu"
-              aria-expanded={projOpen}
-            >
-              Project sections
-              <ChevronRight className={`h-3.5 w-3.5 transition-transform ${projOpen ? "rotate-90" : "rotate-90"}`} />
-            </button>
-            {projOpen && (
-              <div className="absolute right-0 mt-2 w-64 overflow-hidden rounded-lg border border-border bg-card shadow-xl">
-                <div className="border-b border-border px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  Jump to a project category
-                </div>
-                <div className="flex flex-col py-1">
-                  {PROJECT_GROUPS.map((g) => {
-                    const Icon = g.icon;
-                    return (
-                      <button
-                        key={g.id}
-                        onClick={() => jumpTo(`#${g.id}`)}
-                        className="flex items-center gap-2 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-secondary"
-                      >
-                        <Icon className="h-3.5 w-3.5 shrink-0 text-accent" />
-                        <span className="truncate">{g.title}</span>
-                        <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                          {g.items.length}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
           <a
             href="/Ankita_Chatterjee_CV.pdf"
             download
-            className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90 md:px-4"
+            className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1.5 text-[11px] font-medium text-primary-foreground transition-opacity hover:opacity-90 sm:px-3 sm:py-2 sm:text-xs md:px-4"
           >
-            <Download className="h-3.5 w-3.5" />
+            <Download className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
             Resume
           </a>
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-foreground md:hidden"
+          >
+            {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile nav panel */}
+      {mobileOpen && (
+        <div className="border-t border-border bg-background md:hidden">
+          <nav className="mx-auto flex max-w-6xl flex-col px-3 py-2 text-sm">
+            {NAV.map((n) =>
+              n.isProjects ? (
+                <div key={n.href} className="border-t border-border/60 first:border-t-0">
+                  <button
+                    onClick={() => setMobileProjOpen((o) => !o)}
+                    className="flex w-full items-center justify-between py-2.5 text-left text-foreground"
+                    aria-expanded={mobileProjOpen}
+                  >
+                    <span>Projects</span>
+                    <ChevronRight className={`h-4 w-4 transition-transform ${mobileProjOpen ? "rotate-90" : ""}`} />
+                  </button>
+                  {mobileProjOpen && (
+                    <div className="mb-2 flex flex-col rounded-md border border-border bg-card">
+                      <button
+                        onClick={() => jumpTo("#projects")}
+                        className="border-b border-border px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-secondary"
+                      >
+                        All projects
+                      </button>
+                      {PROJECT_GROUPS.map((g) => {
+                        const Icon = g.icon;
+                        return (
+                          <button
+                            key={g.id}
+                            onClick={() => jumpTo(`#${g.id}`)}
+                            className="flex items-center gap-2 px-3 py-2 text-left text-sm text-foreground hover:bg-secondary"
+                          >
+                            <Icon className="h-3.5 w-3.5 shrink-0 text-accent" />
+                            <span>{g.title}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <a
+                  key={n.href}
+                  href={n.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="border-t border-border/60 py-2.5 text-foreground first:border-t-0"
+                >
+                  {n.label}
+                </a>
+              )
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
+
 
 function Hero() {
   return (
