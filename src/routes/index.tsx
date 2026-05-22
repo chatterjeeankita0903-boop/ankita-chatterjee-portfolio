@@ -402,6 +402,7 @@ function Header({ projButtonRef }: { projButtonRef: React.RefObject<HTMLButtonEl
   const ProjectsDropdown = ({ id }: { id?: string }) => (
     <div className="relative" data-projects-dropdown>
       <button
+        ref={projButtonRef}
         onClick={(e) => { e.stopPropagation(); setProjOpen((o) => !o); }}
         className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground data-[open=true]:text-foreground"
         data-open={projOpen}
