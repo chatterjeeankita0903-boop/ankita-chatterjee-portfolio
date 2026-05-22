@@ -262,9 +262,10 @@ const SKILLS = {
 };
 
 function Portfolio() {
+  const projButtonRef = useRef<HTMLButtonElement>(null);
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
+      <Header projButtonRef={projButtonRef} />
       <main>
         <Hero />
         <About />
@@ -275,7 +276,7 @@ function Portfolio() {
       </main>
       <Footer />
       <QuickJump />
-      <ScrollHint />
+      <ScrollHint targetRef={projButtonRef} />
     </div>
   );
 }
