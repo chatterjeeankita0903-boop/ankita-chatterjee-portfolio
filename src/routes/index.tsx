@@ -265,7 +265,7 @@ function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <main>
+      <main className="pb-20 md:pb-0">
         <Hero />
         <About />
         <Experience />
