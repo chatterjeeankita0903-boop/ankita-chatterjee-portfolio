@@ -265,7 +265,7 @@ function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <main>
+      <main className="pb-20 md:pb-0">
         <Hero />
         <About />
         <Experience />
@@ -308,43 +308,71 @@ function ScrollHint() {
     return () => clearTimeout(t);
   }, [show, closed]);
 
+  // Toggle a global flag so the Projects buttons can pulse while the tip is visible
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (show && !closed) document.body.setAttribute("data-hint-projects", "1");
+    else document.body.removeAttribute("data-hint-projects");
+    return () => document.body.removeAttribute("data-hint-projects");
+  }, [show, closed]);
+
   if (!show || closed) return null;
 
   return (
-    <div className="fixed left-1/2 top-20 z-[60] w-[min(92vw,420px)] -translate-x-1/2 animate-in fade-in slide-in-from-top-4 duration-500">
-      <div className="relative overflow-hidden rounded-xl border border-accent/40 bg-card p-4 pr-10 shadow-2xl ring-1 ring-accent/20">
-        <div className="flex items-start gap-3">
-          <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
-            <Sparkles className="h-4 w-4" />
-          </span>
-          <div className="text-sm leading-relaxed text-foreground">
-            <p className="font-medium text-primary">Quick tip</p>
-            <p className="mt-0.5 text-muted-foreground">
-              Use <span className="font-semibold text-foreground">"Project sections"</span> in the top bar to jump straight to any project category.
-            </p>
-          </div>
-        </div>
-        <button
-          onClick={dismiss}
-          aria-label="Dismiss tip"
-          className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-        >
-          <X className="h-4 w-4" />
-        </button>
+    <>
+      {/* Desktop tip — anchored under the top bar */}
+      <div className="fixed left-1/2 top-20 z-[60] hidden w-[min(92vw,420px)] -translate-x-1/2 animate-in fade-in slide-in-from-top-4 duration-500 md:block">
+        <HintCard dismiss={dismiss} placement="top" />
       </div>
+      {/* Mobile tip — anchored above the bottom tab bar */}
+      <div className="fixed bottom-[76px] left-1/2 z-[60] w-[min(92vw,420px)] -translate-x-1/2 animate-in fade-in slide-in-from-bottom-4 duration-500 md:hidden">
+        <HintCard dismiss={dismiss} placement="bottom" />
+      </div>
+    </>
+  );
+}
+
+function HintCard({ dismiss, placement }: { dismiss: () => void; placement: "top" | "bottom" }) {
+  return (
+    <div className="relative overflow-hidden rounded-xl border border-accent/40 bg-card p-4 pr-10 shadow-2xl ring-1 ring-accent/20">
+      {/* Pointer arrow toward the Projects button */}
+      <span
+        aria-hidden
+        className={`absolute left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border border-accent/40 bg-card ${
+          placement === "top" ? "-top-1.5 border-b-0 border-r-0" : "-bottom-1.5 border-l-0 border-t-0"
+        }`}
+      />
+      <div className="flex items-start gap-3">
+        <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+          <Sparkles className="h-4 w-4" />
+        </span>
+        <div className="text-sm leading-relaxed text-foreground">
+          <p className="font-medium text-primary">Quick tip</p>
+          <p className="mt-0.5 text-muted-foreground">
+            Tap the highlighted <span className="font-semibold text-foreground">Projects ▾</span> menu to jump straight to any project category.
+          </p>
+        </div>
+      </div>
+      <button
+        onClick={dismiss}
+        aria-label="Dismiss tip"
+        className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+      >
+        <X className="h-4 w-4" />
+      </button>
     </div>
   );
 }
 
 function Header() {
   const [projOpen, setProjOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileProjOpen, setMobileProjOpen] = useState(false);
+  const [mProjOpen, setMProjOpen] = useState(false);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
       if (!t.closest("[data-projects-dropdown]")) setProjOpen(false);
+      if (!t.closest("[data-mobile-projects]")) setMProjOpen(false);
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
@@ -352,20 +380,24 @@ function Header() {
 
   const jumpTo = (hash: string) => {
     setProjOpen(false);
-    setMobileOpen(false);
-    setMobileProjOpen(false);
+    setMProjOpen(false);
     window.location.hash = hash;
   };
 
-  const ProjectsDropdown = ({ id }: { id?: string }) => (
+  // Pulse highlight class applied while the ScrollHint tip is visible.
+  // body[data-hint-projects="1"] is set by ScrollHint; we use the `group/hint`
+  // pattern via an inline data attr selector below.
+  const pulseCls =
+    "[body[data-hint-projects='1']_&]:ring-2 [body[data-hint-projects='1']_&]:ring-accent [body[data-hint-projects='1']_&]:animate-pulse";
+
+  const ProjectsDropdown = () => (
     <div className="relative" data-projects-dropdown>
       <button
         onClick={(e) => { e.stopPropagation(); setProjOpen((o) => !o); }}
-        className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground data-[open=true]:text-foreground"
+        className={`inline-flex items-center gap-1 rounded-md px-1.5 py-1 text-muted-foreground transition-colors hover:text-foreground data-[open=true]:text-foreground ${pulseCls}`}
         data-open={projOpen}
         aria-haspopup="menu"
         aria-expanded={projOpen}
-        id={id}
       >
         Projects
         <ChevronRight className={`h-3 w-3 transition-transform ${projOpen ? "rotate-[270deg]" : "rotate-90"}`} />
@@ -399,24 +431,24 @@ function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-4 md:px-6 md:py-4">
-        <a href="#top" className="truncate font-display text-sm font-bold tracking-tight text-primary sm:text-base md:text-lg">
-          Ankita Chatterjee
-        </a>
+    <>
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-4 md:px-6 md:py-4">
+          <a href="#top" className="truncate font-display text-sm font-bold tracking-tight text-primary sm:text-base md:text-lg">
+            Ankita Chatterjee
+          </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-5 text-sm md:flex">
-          {NAV.map((n) =>
-            n.isProjects ? <ProjectsDropdown key={n.href} /> : (
-              <a key={n.href} href={n.href} className="text-muted-foreground transition-colors hover:text-foreground">
-                {n.label}
-              </a>
-            )
-          )}
-        </nav>
+          {/* Desktop nav */}
+          <nav className="hidden items-center gap-5 text-sm md:flex">
+            {NAV.map((n) =>
+              n.isProjects ? <ProjectsDropdown key={n.href} /> : (
+                <a key={n.href} href={n.href} className="text-muted-foreground transition-colors hover:text-foreground">
+                  {n.label}
+                </a>
+              )
+            )}
+          </nav>
 
-        <div className="flex items-center gap-2">
           <a
             href="/Ankita_Chatterjee_CV.pdf"
             download
@@ -425,40 +457,27 @@ function Header() {
             <Download className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
             Resume
           </a>
-          {/* Mobile menu toggle */}
-          <button
-            onClick={() => setMobileOpen((o) => !o)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-foreground md:hidden"
-          >
-            {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile nav panel */}
-      {mobileOpen && (
-        <div className="border-t border-border bg-background md:hidden">
-          <nav className="mx-auto flex max-w-6xl flex-col px-3 py-2 text-sm">
-            {NAV.map((n) =>
-              n.isProjects ? (
-                <div key={n.href} className="border-t border-border/60 first:border-t-0">
-                  <button
-                    onClick={() => setMobileProjOpen((o) => !o)}
-                    className="flex w-full items-center justify-between py-2.5 text-left text-foreground"
-                    aria-expanded={mobileProjOpen}
-                  >
-                    <span>Projects</span>
-                    <ChevronRight className={`h-4 w-4 transition-transform ${mobileProjOpen ? "rotate-90" : ""}`} />
-                  </button>
-                  {mobileProjOpen && (
-                    <div className="mb-2 flex flex-col rounded-md border border-border bg-card">
-                      <button
-                        onClick={() => jumpTo("#projects")}
-                        className="border-b border-border px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-secondary"
-                      >
-                        All projects
-                      </button>
+      {/* Mobile bottom tab bar */}
+      <nav
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 backdrop-blur md:hidden"
+        aria-label="Primary"
+      >
+        <ul className="mx-auto flex max-w-6xl items-center justify-around px-1 py-1.5 text-xs">
+          {NAV.map((n) =>
+            n.isProjects ? (
+              <li key={n.href} className="relative" data-mobile-projects>
+                {mProjOpen && (
+                  <div className="absolute bottom-full left-1/2 mb-2 w-64 -translate-x-1/2 overflow-hidden rounded-lg border border-border bg-card shadow-2xl">
+                    <button
+                      onClick={() => jumpTo("#projects")}
+                      className="flex w-full items-center gap-2 border-b border-border px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    >
+                      All projects
+                    </button>
+                    <div className="flex max-h-[55vh] flex-col overflow-y-auto py-1">
                       {PROJECT_GROUPS.map((g) => {
                         const Icon = g.icon;
                         return (
@@ -468,28 +487,37 @@ function Header() {
                             className="flex items-center gap-2 px-3 py-2 text-left text-sm text-foreground hover:bg-secondary"
                           >
                             <Icon className="h-3.5 w-3.5 shrink-0 text-accent" />
-                            <span>{g.title}</span>
+                            <span className="truncate">{g.title}</span>
                           </button>
                         );
                       })}
                     </div>
-                  )}
-                </div>
-              ) : (
+                  </div>
+                )}
+                <button
+                  onClick={(e) => { e.stopPropagation(); setMProjOpen((o) => !o); }}
+                  aria-haspopup="menu"
+                  aria-expanded={mProjOpen}
+                  className={`inline-flex items-center gap-0.5 rounded-md px-3 py-1.5 font-medium text-foreground ${pulseCls}`}
+                >
+                  Projects
+                  <ChevronRight className={`h-3 w-3 transition-transform ${mProjOpen ? "-rotate-90" : "rotate-90"}`} />
+                </button>
+              </li>
+            ) : (
+              <li key={n.href}>
                 <a
-                  key={n.href}
                   href={n.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="border-t border-border/60 py-2.5 text-foreground first:border-t-0"
+                  className="inline-flex rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {n.label}
                 </a>
-              )
-            )}
-          </nav>
-        </div>
-      )}
-    </header>
+              </li>
+            )
+          )}
+        </ul>
+      </nav>
+    </>
   );
 }
 
