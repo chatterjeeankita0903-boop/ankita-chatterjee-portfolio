@@ -308,30 +308,58 @@ function ScrollHint() {
     return () => clearTimeout(t);
   }, [show, closed]);
 
+  // Toggle a global flag so the Projects buttons can pulse while the tip is visible
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (show && !closed) document.body.setAttribute("data-hint-projects", "1");
+    else document.body.removeAttribute("data-hint-projects");
+    return () => document.body.removeAttribute("data-hint-projects");
+  }, [show, closed]);
+
   if (!show || closed) return null;
 
   return (
-    <div className="fixed left-1/2 top-20 z-[60] w-[min(92vw,420px)] -translate-x-1/2 animate-in fade-in slide-in-from-top-4 duration-500">
-      <div className="relative overflow-hidden rounded-xl border border-accent/40 bg-card p-4 pr-10 shadow-2xl ring-1 ring-accent/20">
-        <div className="flex items-start gap-3">
-          <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
-            <Sparkles className="h-4 w-4" />
-          </span>
-          <div className="text-sm leading-relaxed text-foreground">
-            <p className="font-medium text-primary">Quick tip</p>
-            <p className="mt-0.5 text-muted-foreground">
-              Use <span className="font-semibold text-foreground">"Project sections"</span> in the top bar to jump straight to any project category.
-            </p>
-          </div>
-        </div>
-        <button
-          onClick={dismiss}
-          aria-label="Dismiss tip"
-          className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-        >
-          <X className="h-4 w-4" />
-        </button>
+    <>
+      {/* Desktop tip — anchored under the top bar */}
+      <div className="fixed left-1/2 top-20 z-[60] hidden w-[min(92vw,420px)] -translate-x-1/2 animate-in fade-in slide-in-from-top-4 duration-500 md:block">
+        <HintCard dismiss={dismiss} placement="top" />
       </div>
+      {/* Mobile tip — anchored above the bottom tab bar */}
+      <div className="fixed bottom-[76px] left-1/2 z-[60] w-[min(92vw,420px)] -translate-x-1/2 animate-in fade-in slide-in-from-bottom-4 duration-500 md:hidden">
+        <HintCard dismiss={dismiss} placement="bottom" />
+      </div>
+    </>
+  );
+}
+
+function HintCard({ dismiss, placement }: { dismiss: () => void; placement: "top" | "bottom" }) {
+  return (
+    <div className="relative overflow-hidden rounded-xl border border-accent/40 bg-card p-4 pr-10 shadow-2xl ring-1 ring-accent/20">
+      {/* Pointer arrow toward the Projects button */}
+      <span
+        aria-hidden
+        className={`absolute left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border border-accent/40 bg-card ${
+          placement === "top" ? "-top-1.5 border-b-0 border-r-0" : "-bottom-1.5 border-l-0 border-t-0"
+        }`}
+      />
+      <div className="flex items-start gap-3">
+        <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+          <Sparkles className="h-4 w-4" />
+        </span>
+        <div className="text-sm leading-relaxed text-foreground">
+          <p className="font-medium text-primary">Quick tip</p>
+          <p className="mt-0.5 text-muted-foreground">
+            Tap the highlighted <span className="font-semibold text-foreground">Projects ▾</span> menu to jump straight to any project category.
+          </p>
+        </div>
+      </div>
+      <button
+        onClick={dismiss}
+        aria-label="Dismiss tip"
+        className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+      >
+        <X className="h-4 w-4" />
+      </button>
     </div>
   );
 }
