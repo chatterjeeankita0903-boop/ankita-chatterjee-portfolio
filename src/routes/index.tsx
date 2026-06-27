@@ -212,6 +212,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "RAG-based agent extracting YouTube transcripts, storing them in a vector database, and answering questions strictly grounded in the video content — engineered to eliminate hallucinations.",
         tech: "LangChain · OpenAI GPT-4 · YouTube Transcript API · Vector DB · Python",
         links: [
+          { label: "Live App", href: "https://youtube-chatbot.up.railway.app/" },
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" },
           { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQAk3Vhy11RUQooN5wAE7QslAcPaNTOBKlQEtly9l6Gf8Mk?e=J1O8Ic" },
         ],
