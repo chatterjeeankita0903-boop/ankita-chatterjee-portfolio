@@ -21,6 +21,8 @@ import thumbPbiFi from "@/assets/projects/pbi-fi-scorecard.png";
 import thumbPbiCarInfo from "@/assets/projects/pbi-carinfo.png";
 import thumbPbiBankMarketing from "@/assets/projects/pbi-bank-marketing.png";
 import thumbPbiBankChurn from "@/assets/projects/pbi-bank-churn.png";
+import thumbYoutubeRagFlow from "@/assets/projects/youtube-rag-flow.png.asset.json";
+import thumbMultiAgentRagFlow from "@/assets/projects/multi-agent-rag-flow.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
