@@ -226,7 +226,6 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbMultiAgentRagFlow.url,
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-Using-LangGraph" },
-          { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBYnSstw6WfSayG4Di0fv1cAVVir5no5SRvuMiYBVV0zfw?e=mBibjI" },
         ],
       },
     ],
