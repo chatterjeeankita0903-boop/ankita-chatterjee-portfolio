@@ -370,6 +370,7 @@ function HintCard({ dismiss, placement }: { dismiss: () => void; placement: "top
 function Header() {
   const [projOpen, setProjOpen] = useState(false);
   const [mProjOpen, setMProjOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
