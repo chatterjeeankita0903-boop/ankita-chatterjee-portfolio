@@ -217,7 +217,6 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         links: [
           { label: "Live App", href: "https://youtube-chatbot.up.railway.app/" },
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" },
-          { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQAk3Vhy11RUQooN5wAE7QslAcPaNTOBKlQEtly9l6Gf8Mk?e=J1O8Ic" },
         ],
       },
       {
