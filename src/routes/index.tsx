@@ -707,6 +707,17 @@ function Skills() {
   );
 }
 
+function thumbnailLinkHref(p: Project, groupId: string) {
+  if (groupId === "powerbi") {
+    return p.links.find((l) => l.label === "Dashboard Glimpses")?.href ?? p.links[0]?.href;
+  }
+  return (
+    p.links.find((l) => l.label === "Live App")?.href ??
+    p.links.find((l) => l.label === "Documentation")?.href ??
+    p.links[0]?.href
+  );
+}
+
 function ProjectThumbnailMedia({ p, landscape }: { p: Project; landscape: boolean }) {
   return landscape ? (
     <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
