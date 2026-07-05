@@ -707,6 +707,32 @@ function Skills() {
   );
 }
 
+function ProjectThumbnailMedia({ p, landscape }: { p: Project; landscape: boolean }) {
+  return landscape ? (
+    <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
+      <div className="aspect-[16/10] flex items-center justify-center">
+        <img
+          src={p.thumbnail}
+          alt={`${p.title} preview`}
+          loading="lazy"
+          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+    </div>
+  ) : (
+    <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
+      <div className="aspect-[9/19] flex items-center justify-center">
+        <img
+          src={p.thumbnail}
+          alt={`${p.title} preview`}
+          loading="lazy"
+          className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
+        />
+      </div>
+    </div>
+  );
+}
+
 function Projects() {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   return (
