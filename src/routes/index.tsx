@@ -76,6 +76,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "AI-powered personal finance app offering expense tracking, budgeting, and actionable financial insights in one clean dashboard.",
         tech: "Lovable · React · Supabase",
         thumbnail: thumbFinclarity,
+        flowchart: flowFinclarity.url,
         links: [
           { label: "Live App", href: "https://fin-clarity-smart.lovable.app" },
           { label: "Deck", href: "https://drive.google.com/file/d/1MOelakAXoaAyprcYse_NVnU24KxHrAuX/view?usp=sharing" },
