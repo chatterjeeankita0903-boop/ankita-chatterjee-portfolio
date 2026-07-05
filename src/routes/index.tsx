@@ -21,6 +21,8 @@ import thumbPbiFi from "@/assets/projects/pbi-fi-scorecard.png";
 import thumbPbiCarInfo from "@/assets/projects/pbi-carinfo.png";
 import thumbPbiBankMarketing from "@/assets/projects/pbi-bank-marketing.png";
 import thumbPbiBankChurn from "@/assets/projects/pbi-bank-churn.png";
+import thumbYoutubeRagFlow from "@/assets/projects/youtube-rag-flow.png.asset.json";
+import thumbMultiAgentRagFlow from "@/assets/projects/multi-agent-rag-flow.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -211,6 +213,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "YouTube Video Summary Creator (LangChain RAG Agent)",
         description: "RAG-based agent extracting YouTube transcripts, storing them in a vector database, and answering questions strictly grounded in the video content — engineered to eliminate hallucinations.",
         tech: "LangChain · OpenAI GPT-4 · YouTube Transcript API · Vector DB · Python",
+        thumbnail: thumbYoutubeRagFlow.url,
         links: [
           { label: "Live App", href: "https://youtube-chatbot.up.railway.app/" },
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" },
@@ -221,6 +224,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         title: "Multi-Agent RAG Chatbot Collection (LangGraph)",
         description: "Two conversational AI systems — a general-purpose LLM chatbot and a document-grounded RAG assistant — built with LangGraph to demonstrate stateful agent orchestration and private knowledge retrieval.",
         tech: "LangGraph · GPT-4o · FAISS · Python · Jupyter",
+        thumbnail: thumbMultiAgentRagFlow.url,
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-Using-LangGraph" },
           { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBYnSstw6WfSayG4Di0fv1cAVVir5no5SRvuMiYBVV0zfw?e=mBibjI" },
@@ -739,7 +743,7 @@ function Projects() {
                           rel="noreferrer noopener"
                           className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
                         >
-                          {group.id === "copilot-agents" || group.id === "powerbi" ? (
+                          {group.id === "copilot-agents" || group.id === "powerbi" || group.id === "langchain-agents" ? (
                             <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
                               <div className="aspect-[16/10] flex items-center justify-center">
                                 <img
