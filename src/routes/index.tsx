@@ -128,6 +128,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "AI travel app surfacing personalized destination recommendations and trip ideas through an elegant, conversational interface.",
         tech: "Antigravity · HTML/CSS/JS",
         thumbnail: thumbWander,
+        flowchart: flowWander.url,
         links: [
           { label: "Live App", href: "/wander/index.html" },
           { label: "Deck", href: "https://drive.google.com/file/d/1mTd-ey6BdtbvOyo55jz1Fl9OpCd8gEuk/view?usp=sharing" },
