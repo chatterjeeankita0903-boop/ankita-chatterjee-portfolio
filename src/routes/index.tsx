@@ -799,6 +799,30 @@ function Projects() {
           })}
         </div>
       </div>
+      {lightbox && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightbox.alt}
+          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm cursor-zoom-out animate-in fade-in duration-200"
+        >
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setLightbox(null)}
+            className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-background/90 text-foreground shadow-lg transition-colors hover:bg-background"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[92vh] max-w-[95vw] rounded-lg object-contain shadow-2xl cursor-default"
+          />
+        </div>
+      )}
     </section>
   );
 }
