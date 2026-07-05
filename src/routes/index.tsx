@@ -98,6 +98,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Mobile prototype redesigning Blinkit to increase AOV and customer base through better discovery and UX.",
         tech: "Claude (Anthropic) · React · HTML/CSS",
         thumbnail: thumbBlinkit,
+        flowchart: flowBlinkit.url,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/234d15b7-74fe-4d30-9d6c-3ba85d9b80d1" },
           { label: "Deck", href: "https://drive.google.com/file/d/1A2BvSAulfDldnYI9oVh-gUNdW4aBROwM/view?usp=sharing" },
