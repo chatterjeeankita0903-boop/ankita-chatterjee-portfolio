@@ -784,7 +784,7 @@ function Projects() {
                           </button>
                         ) : (
                           <a
-                            href={p.links[0].href}
+                            href={thumbnailLinkHref(p, group.id)}
                             target="_blank"
                             rel="noreferrer noopener"
                             className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
