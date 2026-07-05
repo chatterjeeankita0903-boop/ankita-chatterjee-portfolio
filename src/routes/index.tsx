@@ -217,7 +217,6 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         links: [
           { label: "Live App", href: "https://youtube-chatbot.up.railway.app/" },
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" },
-          { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQAk3Vhy11RUQooN5wAE7QslAcPaNTOBKlQEtly9l6Gf8Mk?e=J1O8Ic" },
         ],
       },
       {
@@ -227,7 +226,6 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbMultiAgentRagFlow.url,
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-Using-LangGraph" },
-          { label: "Agent Flowchart", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBYnSstw6WfSayG4Di0fv1cAVVir5no5SRvuMiYBVV0zfw?e=mBibjI" },
         ],
       },
     ],
@@ -710,6 +708,7 @@ function Skills() {
 }
 
 function Projects() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   return (
     <section id="projects" className="border-b border-border bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-20">
@@ -737,11 +736,11 @@ function Projects() {
                       className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
                     >
                       {p.thumbnail && (
-                        <a
-                          href={p.links[0]?.href}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
+                        <button
+                          type="button"
+                          onClick={() => setLightbox({ src: p.thumbnail!, alt: `${p.title} preview` })}
+                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6 cursor-zoom-in"
+                          aria-label={`Expand ${p.title} preview`}
                         >
                           {group.id === "copilot-agents" || group.id === "powerbi" || group.id === "langchain-agents" ? (
                             <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
@@ -766,7 +765,7 @@ function Projects() {
                               </div>
                             </div>
                           )}
-                        </a>
+                        </button>
                       )}
                       <div className="flex flex-1 flex-col p-6">
                         <h4 className="font-display text-lg font-semibold leading-snug text-primary">
@@ -800,6 +799,30 @@ function Projects() {
           })}
         </div>
       </div>
+      {lightbox && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightbox.alt}
+          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm cursor-zoom-out animate-in fade-in duration-200"
+        >
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setLightbox(null)}
+            className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-background/90 text-foreground shadow-lg transition-colors hover:bg-background"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[92vh] max-w-[95vw] rounded-lg object-contain shadow-2xl cursor-default"
+          />
+        </div>
+      )}
     </section>
   );
 }
