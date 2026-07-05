@@ -109,6 +109,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Prototype giving Uber a safety-first ride experience that integrates preventive, real-time, and post-ride safety mechanisms.",
         tech: "Claude (Anthropic) · React · HTML/CSS",
         thumbnail: thumbUberSafe,
+        flowchart: flowUberSafe.url,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/fce67220-e0b9-4143-b4dd-765cb43f267b" },
           { label: "PRD", href: "https://drive.google.com/file/d/1au9E6sqVkgCA9PI323vk11vfRsMt7agQ/view?usp=sharing" },
