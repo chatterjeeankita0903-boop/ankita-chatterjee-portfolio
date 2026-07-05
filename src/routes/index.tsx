@@ -23,6 +23,15 @@ import thumbPbiBankMarketing from "@/assets/projects/pbi-bank-marketing.png";
 import thumbPbiBankChurn from "@/assets/projects/pbi-bank-churn.png";
 import thumbYoutubeRagFlow from "@/assets/projects/youtube-rag-flow.png.asset.json";
 import thumbMultiAgentRagFlow from "@/assets/projects/multi-agent-rag-flow.png.asset.json";
+import flowEbt from "@/assets/projects/flow/ebt-flow.png.asset.json";
+import flowFinclarity from "@/assets/projects/flow/finclarity-flow.png.asset.json";
+import flowOnset from "@/assets/projects/flow/onset-flow.png.asset.json";
+import flowBlinkit from "@/assets/projects/flow/blinkit-flow.png.asset.json";
+import flowUberSafe from "@/assets/projects/flow/ubersafe-flow.png.asset.json";
+import flowLighting from "@/assets/projects/flow/lighting-flow.png.asset.json";
+import flowWander from "@/assets/projects/flow/wander-flow.png.asset.json";
+import flowFiScorecard from "@/assets/projects/flow/fi-scorecard-flow.png.asset.json";
+import flowLumiere from "@/assets/projects/flow/lumiere-flow.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
