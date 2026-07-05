@@ -743,7 +743,7 @@ function Projects() {
                           rel="noreferrer noopener"
                           className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
                         >
-                          {group.id === "copilot-agents" || group.id === "powerbi" ? (
+                          {group.id === "copilot-agents" || group.id === "powerbi" || group.id === "langchain-agents" ? (
                             <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
                               <div className="aspect-[16/10] flex items-center justify-center">
                                 <img
