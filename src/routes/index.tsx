@@ -801,6 +801,40 @@ function Projects() {
                           >
                             <ProjectThumbnailMedia p={p} landscape />
                           </button>
+                        ) : group.id === "ai-apps" && p.flowchart ? (
+                          <div className="flex items-stretch gap-3 border-b border-border bg-gradient-to-br from-muted to-background p-4 sm:p-6">
+                            <a
+                              href={thumbnailLinkHref(p, group.id)}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              className="flex shrink-0 items-center justify-center"
+                              aria-label={`Open ${p.title}`}
+                            >
+                              <div className="relative w-[110px] overflow-hidden rounded-[1.25rem] border-[5px] border-foreground/90 bg-background shadow-xl sm:w-[130px]">
+                                <div className="aspect-[9/19] flex items-center justify-center">
+                                  <img
+                                    src={p.thumbnail}
+                                    alt={`${p.title} preview`}
+                                    loading="lazy"
+                                    className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
+                                  />
+                                </div>
+                              </div>
+                            </a>
+                            <button
+                              type="button"
+                              onClick={() => setLightbox({ src: p.flowchart!, alt: `${p.title} flowchart` })}
+                              className="group/flow relative flex min-w-0 flex-1 items-center justify-center overflow-hidden rounded-lg border border-border bg-background shadow-md cursor-zoom-in"
+                              aria-label={`Expand ${p.title} flowchart`}
+                            >
+                              <img
+                                src={p.flowchart}
+                                alt={`${p.title} flowchart`}
+                                loading="lazy"
+                                className="max-h-full max-w-full object-contain p-2 transition-transform duration-500 group-hover/flow:scale-[1.03]"
+                              />
+                            </button>
+                          </div>
                         ) : (
                           <a
                             href={thumbnailLinkHref(p, group.id)}
