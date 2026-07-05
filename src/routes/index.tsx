@@ -23,6 +23,15 @@ import thumbPbiBankMarketing from "@/assets/projects/pbi-bank-marketing.png";
 import thumbPbiBankChurn from "@/assets/projects/pbi-bank-churn.png";
 import thumbYoutubeRagFlow from "@/assets/projects/youtube-rag-flow.png.asset.json";
 import thumbMultiAgentRagFlow from "@/assets/projects/multi-agent-rag-flow.png.asset.json";
+import flowEbt from "@/assets/projects/flow/ebt-flow.png.asset.json";
+import flowFinclarity from "@/assets/projects/flow/finclarity-flow.png.asset.json";
+import flowOnset from "@/assets/projects/flow/onset-flow.png.asset.json";
+import flowBlinkit from "@/assets/projects/flow/blinkit-flow.png.asset.json";
+import flowUberSafe from "@/assets/projects/flow/ubersafe-flow.png.asset.json";
+import flowLighting from "@/assets/projects/flow/lighting-flow.png.asset.json";
+import flowWander from "@/assets/projects/flow/wander-flow.png.asset.json";
+import flowFiScorecard from "@/assets/projects/flow/fi-scorecard-flow.png.asset.json";
+import flowLumiere from "@/assets/projects/flow/lumiere-flow.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -42,6 +51,7 @@ type Project = {
   description: string;
   tech?: string;
   thumbnail?: string;
+  flowchart?: string;
   links: { label: string; href: string }[];
 };
 
@@ -56,6 +66,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "A working prototype D2C Digital journey of Personal Loan External Balance Transfer. External balance transfer is a process of transferring existing Financier's loan to other Financier to get lower interest rate, extra funds, varying tenure etc. This prototype was created to conduct usability testing of the front end look and feel of the App before finalizing the journey in the Axis Bank platform.",
         tech: "Lovable · Figma",
         thumbnail: thumbEbt,
+        flowchart: flowEbt.url,
         links: [
           { label: "Live App", href: "https://ebt-aa.lovable.app" },
         ],
@@ -65,6 +76,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "AI-powered personal finance app offering expense tracking, budgeting, and actionable financial insights in one clean dashboard.",
         tech: "Lovable · React · Supabase",
         thumbnail: thumbFinclarity,
+        flowchart: flowFinclarity.url,
         links: [
           { label: "Live App", href: "https://fin-clarity-smart.lovable.app" },
           { label: "Deck", href: "https://drive.google.com/file/d/1MOelakAXoaAyprcYse_NVnU24KxHrAuX/view?usp=sharing" },
@@ -75,6 +87,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Interactive platform helping first-time investors through smart personalization and curated portfolio guidance.",
         tech: "Claude (Anthropic) · React · HTML/CSS",
         thumbnail: thumbOnset,
+        flowchart: flowOnset.url,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/1597c430-efb5-4ea5-90b7-6342d89c0f94" },
           { label: "Deck", href: "https://drive.google.com/file/d/1ynLe1lZyyFlmFxi1pz6xZxsRBI6Y7WV5/view?usp=sharing" },
@@ -85,6 +98,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Mobile prototype redesigning Blinkit to increase AOV and customer base through better discovery and UX.",
         tech: "Claude (Anthropic) · React · HTML/CSS",
         thumbnail: thumbBlinkit,
+        flowchart: flowBlinkit.url,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/234d15b7-74fe-4d30-9d6c-3ba85d9b80d1" },
           { label: "Deck", href: "https://drive.google.com/file/d/1A2BvSAulfDldnYI9oVh-gUNdW4aBROwM/view?usp=sharing" },
@@ -95,6 +109,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Prototype giving Uber a safety-first ride experience that integrates preventive, real-time, and post-ride safety mechanisms.",
         tech: "Claude (Anthropic) · React · HTML/CSS",
         thumbnail: thumbUberSafe,
+        flowchart: flowUberSafe.url,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/fce67220-e0b9-4143-b4dd-765cb43f267b" },
           { label: "PRD", href: "https://drive.google.com/file/d/1au9E6sqVkgCA9PI323vk11vfRsMt7agQ/view?usp=sharing" },
@@ -105,6 +120,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Field-ready app for logging, tracking, and managing lighting defects across locations — streamlining on-site quality reporting.",
         tech: "Lovable · React · Supabase",
         thumbnail: thumbLighting,
+        flowchart: flowLighting.url,
         links: [{ label: "Live App", href: "https://lightingdefectregister.lovable.app/" }],
       },
       {
@@ -112,6 +128,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "AI travel app surfacing personalized destination recommendations and trip ideas through an elegant, conversational interface.",
         tech: "Antigravity · HTML/CSS/JS",
         thumbnail: thumbWander,
+        flowchart: flowWander.url,
         links: [
           { label: "Live App", href: "/wander/index.html" },
           { label: "Deck", href: "https://drive.google.com/file/d/1mTd-ey6BdtbvOyo55jz1Fl9OpCd8gEuk/view?usp=sharing" },
@@ -122,6 +139,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Interactive web app visualizing financial inclusion scheme performance and FI Index metrics in a clean, browser-based interface.",
         tech: "Lovable · React · MS Excel",
         thumbnail: thumbFiScorecard,
+        flowchart: flowFiScorecard.url,
         links: [{ label: "Dashboard", href: "https://fiscorecard.lovable.app" }],
       },
       {
@@ -129,6 +147,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Luxury D2C beauty storefront for product reviews and customer query resolution — integrated with a live n8n automation workflow.",
         tech: "Lovable · React · n8n · Telegram · Google Sheets · OpenAI GPT-4",
         thumbnail: thumbLumiere,
+        flowchart: flowLumiere.url,
         links: [
           { label: "Live App", href: "https://lumiere-ankita.lovable.app" },
           { label: "Walkthrough", href: "https://drive.google.com/file/d/1TeaItOd8ICoHOH1zZ-StoEeJrtQ2-hVx/view?usp=sharing" },
@@ -782,6 +801,40 @@ function Projects() {
                           >
                             <ProjectThumbnailMedia p={p} landscape />
                           </button>
+                        ) : group.id === "ai-apps" && p.flowchart ? (
+                          <div className="flex items-stretch gap-3 border-b border-border bg-gradient-to-br from-muted to-background p-4 sm:p-6">
+                            <a
+                              href={thumbnailLinkHref(p, group.id)}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              className="flex shrink-0 items-center justify-center"
+                              aria-label={`Open ${p.title}`}
+                            >
+                              <div className="relative w-[110px] overflow-hidden rounded-[1.25rem] border-[5px] border-foreground/90 bg-background shadow-xl sm:w-[130px]">
+                                <div className="aspect-[9/19] flex items-center justify-center">
+                                  <img
+                                    src={p.thumbnail}
+                                    alt={`${p.title} preview`}
+                                    loading="lazy"
+                                    className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
+                                  />
+                                </div>
+                              </div>
+                            </a>
+                            <button
+                              type="button"
+                              onClick={() => setLightbox({ src: p.flowchart!, alt: `${p.title} flowchart` })}
+                              className="group/flow relative flex min-w-0 flex-1 items-center justify-center overflow-hidden rounded-lg border border-border bg-background shadow-md cursor-zoom-in"
+                              aria-label={`Expand ${p.title} flowchart`}
+                            >
+                              <img
+                                src={p.flowchart}
+                                alt={`${p.title} flowchart`}
+                                loading="lazy"
+                                className="max-h-full max-w-full object-contain p-2 transition-transform duration-500 group-hover/flow:scale-[1.03]"
+                              />
+                            </button>
+                          </div>
                         ) : (
                           <a
                             href={thumbnailLinkHref(p, group.id)}
