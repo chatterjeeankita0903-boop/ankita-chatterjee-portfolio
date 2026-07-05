@@ -762,36 +762,29 @@ function Projects() {
                       className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
                     >
                       {p.thumbnail && (
-                        <button
-                          type="button"
-                          onClick={() => setLightbox({ src: p.thumbnail!, alt: `${p.title} preview` })}
-                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6 cursor-zoom-in"
-                          aria-label={`Expand ${p.title} preview`}
-                        >
-                          {group.id === "copilot-agents" || group.id === "powerbi" || group.id === "langchain-agents" ? (
-                            <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
-                              <div className="aspect-[16/10] flex items-center justify-center">
-                                <img
-                                  src={p.thumbnail}
-                                  alt={`${p.title} preview`}
-                                  loading="lazy"
-                                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                                />
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
-                              <div className="aspect-[9/19] flex items-center justify-center">
-                                <img
-                                  src={p.thumbnail}
-                                  alt={`${p.title} preview`}
-                                  loading="lazy"
-                                  className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
-                                />
-                              </div>
-                            </div>
-                          )}
-                        </button>
+                        group.id === "langchain-agents" ? (
+                          <button
+                            type="button"
+                            onClick={() => setLightbox({ src: p.thumbnail!, alt: `${p.title} preview` })}
+                            className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6 cursor-zoom-in"
+                            aria-label={`Expand ${p.title} preview`}
+                          >
+                            <ProjectThumbnailMedia p={p} landscape />
+                          </button>
+                        ) : (
+                          <a
+                            href={p.links[0].href}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
+                            aria-label={`Open ${p.title}`}
+                          >
+                            <ProjectThumbnailMedia
+                              p={p}
+                              landscape={group.id === "copilot-agents" || group.id === "powerbi"}
+                            />
+                          </a>
+                        )
                       )}
                       <div className="flex flex-1 flex-col p-6">
                         <h4 className="font-display text-lg font-semibold leading-snug text-primary">
