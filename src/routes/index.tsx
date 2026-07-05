@@ -708,6 +708,7 @@ function Skills() {
 }
 
 function Projects() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   return (
     <section id="projects" className="border-b border-border bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-20">
