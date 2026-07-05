@@ -87,6 +87,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Interactive platform helping first-time investors through smart personalization and curated portfolio guidance.",
         tech: "Claude (Anthropic) · React · HTML/CSS",
         thumbnail: thumbOnset,
+        flowchart: flowOnset.url,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/1597c430-efb5-4ea5-90b7-6342d89c0f94" },
           { label: "Deck", href: "https://drive.google.com/file/d/1ynLe1lZyyFlmFxi1pz6xZxsRBI6Y7WV5/view?usp=sharing" },
