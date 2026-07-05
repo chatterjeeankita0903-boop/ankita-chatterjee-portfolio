@@ -48,7 +48,7 @@ type Project = {
 const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ className?: string }>; items: Project[] }[] = [
   {
     id: "ai-apps",
-    title: "Apps Created Through AI",
+    title: "Product improvement and Development Projects",
     icon: Sparkles,
     items: [
       {
@@ -137,6 +137,32 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
     ],
   },
   {
+    id: "langchain-agents",
+    title: "AI Agents using LangChain & LangGraph",
+    icon: Brain,
+    items: [
+      {
+        title: "YouTube Video Summary Creator (LangChain RAG Agent)",
+        description: "RAG-based agent extracting YouTube transcripts, storing them in a vector database, and answering questions strictly grounded in the video content — engineered to eliminate hallucinations.",
+        tech: "LangChain · OpenAI GPT-4 · YouTube Transcript API · Vector DB · Python",
+        thumbnail: thumbYoutubeRagFlow.url,
+        links: [
+          { label: "Live App", href: "https://youtube-chatbot.up.railway.app/" },
+          { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" },
+        ],
+      },
+      {
+        title: "Multi-Agent RAG Chatbot Collection (LangGraph)",
+        description: "Two conversational AI systems — a general-purpose LLM chatbot and a document-grounded RAG assistant — built with LangGraph to demonstrate stateful agent orchestration and private knowledge retrieval.",
+        tech: "LangGraph · GPT-4o · FAISS · Python · Jupyter",
+        thumbnail: thumbMultiAgentRagFlow.url,
+        links: [
+          { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-Using-LangGraph" },
+        ],
+      },
+    ],
+  },
+  {
     id: "copilot-agents",
     title: "Co-pilot Studio Agents",
     icon: Bot,
@@ -200,32 +226,6 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/Bank%20Customer%20Churn.pbix" },
           { label: "Dashboard Glimpses", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQAmjusxZwKUTJ6E9lhMcFMDAf3KZfDAKojUIcnHfDud_2w?e=yh1jnz" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "langchain-agents",
-    title: "AI Agents using LangChain & LangGraph",
-    icon: Brain,
-    items: [
-      {
-        title: "YouTube Video Summary Creator (LangChain RAG Agent)",
-        description: "RAG-based agent extracting YouTube transcripts, storing them in a vector database, and answering questions strictly grounded in the video content — engineered to eliminate hallucinations.",
-        tech: "LangChain · OpenAI GPT-4 · YouTube Transcript API · Vector DB · Python",
-        thumbnail: thumbYoutubeRagFlow.url,
-        links: [
-          { label: "Live App", href: "https://youtube-chatbot.up.railway.app/" },
-          { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-using-LangChain" },
-        ],
-      },
-      {
-        title: "Multi-Agent RAG Chatbot Collection (LangGraph)",
-        description: "Two conversational AI systems — a general-purpose LLM chatbot and a document-grounded RAG assistant — built with LangGraph to demonstrate stateful agent orchestration and private knowledge retrieval.",
-        tech: "LangGraph · GPT-4o · FAISS · Python · Jupyter",
-        thumbnail: thumbMultiAgentRagFlow.url,
-        links: [
-          { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/AI-agents-Using-LangGraph" },
         ],
       },
     ],
@@ -707,6 +707,32 @@ function Skills() {
   );
 }
 
+function ProjectThumbnailMedia({ p, landscape }: { p: Project; landscape: boolean }) {
+  return landscape ? (
+    <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
+      <div className="aspect-[16/10] flex items-center justify-center">
+        <img
+          src={p.thumbnail}
+          alt={`${p.title} preview`}
+          loading="lazy"
+          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+    </div>
+  ) : (
+    <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
+      <div className="aspect-[9/19] flex items-center justify-center">
+        <img
+          src={p.thumbnail}
+          alt={`${p.title} preview`}
+          loading="lazy"
+          className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
+        />
+      </div>
+    </div>
+  );
+}
+
 function Projects() {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   return (
@@ -736,36 +762,29 @@ function Projects() {
                       className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
                     >
                       {p.thumbnail && (
-                        <button
-                          type="button"
-                          onClick={() => setLightbox({ src: p.thumbnail!, alt: `${p.title} preview` })}
-                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6 cursor-zoom-in"
-                          aria-label={`Expand ${p.title} preview`}
-                        >
-                          {group.id === "copilot-agents" || group.id === "powerbi" || group.id === "langchain-agents" ? (
-                            <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
-                              <div className="aspect-[16/10] flex items-center justify-center">
-                                <img
-                                  src={p.thumbnail}
-                                  alt={`${p.title} preview`}
-                                  loading="lazy"
-                                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                                />
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="relative w-[55%] max-w-[220px] overflow-hidden rounded-[1.75rem] border-[6px] border-foreground/90 bg-background shadow-xl">
-                              <div className="aspect-[9/19] flex items-center justify-center">
-                                <img
-                                  src={p.thumbnail}
-                                  alt={`${p.title} preview`}
-                                  loading="lazy"
-                                  className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.title === "FinClarity — Smart Finance Tracker" ? "object-contain" : "object-cover object-top"}`}
-                                />
-                              </div>
-                            </div>
-                          )}
-                        </button>
+                        group.id === "langchain-agents" ? (
+                          <button
+                            type="button"
+                            onClick={() => setLightbox({ src: p.thumbnail!, alt: `${p.title} preview` })}
+                            className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6 cursor-zoom-in"
+                            aria-label={`Expand ${p.title} preview`}
+                          >
+                            <ProjectThumbnailMedia p={p} landscape />
+                          </button>
+                        ) : (
+                          <a
+                            href={p.links[0].href}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
+                            aria-label={`Open ${p.title}`}
+                          >
+                            <ProjectThumbnailMedia
+                              p={p}
+                              landscape={group.id === "copilot-agents" || group.id === "powerbi"}
+                            />
+                          </a>
+                        )
                       )}
                       <div className="flex flex-1 flex-col p-6">
                         <h4 className="font-display text-lg font-semibold leading-snug text-primary">
