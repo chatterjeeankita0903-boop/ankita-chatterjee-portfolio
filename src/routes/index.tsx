@@ -51,6 +51,7 @@ type Project = {
   description: string;
   tech?: string;
   thumbnail?: string;
+  flowchart?: string;
   links: { label: string; href: string }[];
 };
 
