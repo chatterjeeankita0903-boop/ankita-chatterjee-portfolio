@@ -65,7 +65,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbFinclarity,
         links: [
           { label: "Live App", href: "https://fin-clarity-smart.lovable.app" },
-          { label: "Deck", href: "https://1drv.ms/p/c/66052eb9d4e727fc/IQBdevdy_oTKRJW1UdV75Ad8AdZQ-_iQa7LJCukgMlqW9ik?e=7efetJ" },
+          { label: "Deck", href: "https://drive.google.com/file/d/1MOelakAXoaAyprcYse_NVnU24KxHrAuX/view?usp=sharing" },
         ],
       },
       {
@@ -85,7 +85,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbBlinkit,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/234d15b7-74fe-4d30-9d6c-3ba85d9b80d1" },
-          { label: "Deck", href: "https://1drv.ms/p/c/66052eb9d4e727fc/IQBigz7UYO_ySaT4TYjpZ6BBAR-ONSxxger7UG0Nrmfj6g0?e=XnQOm5" },
+          { label: "Deck", href: "https://drive.google.com/file/d/1A2BvSAulfDldnYI9oVh-gUNdW4aBROwM/view?usp=sharing" },
         ],
       },
       {
@@ -95,7 +95,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbUberSafe,
         links: [
           { label: "Live App", href: "https://claude.ai/public/artifacts/fce67220-e0b9-4143-b4dd-765cb43f267b" },
-          { label: "PRD", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBE-sGUTqmKSY34fUnQTg_VAR6wPcQ7-CRvgj_Cg4qCEOw?e=b2Qo1E" },
+          { label: "PRD", href: "https://drive.google.com/file/d/1au9E6sqVkgCA9PI323vk11vfRsMt7agQ/view?usp=sharing" },
         ],
       },
       {
@@ -112,7 +112,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbWander,
         links: [
           { label: "Live App", href: "/wander/index.html" },
-          { label: "Deck", href: "https://1drv.ms/p/c/66052eb9d4e727fc/IQDR_SEBCg52TrmLmBvGX4fhAQEg8syiwuHXnMuV1E3BWPk?e=ncUlU4" },
+          { label: "Deck", href: "https://drive.google.com/file/d/1mTd-ey6BdtbvOyo55jz1Fl9OpCd8gEuk/view?usp=sharing" },
         ],
       },
       {
@@ -145,7 +145,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         tech: "Microsoft Copilot Studio · Generative AI · Prompt Engineering",
         thumbnail: thumbTravelAgent,
         links: [
-          { label: "Documentation", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBs_v0afU-IQ7nYIdGmzJ3sAaN7neB2-WombhYfZUIZo44?e=vaZpxU" },
+          { label: "Documentation", href: "https://drive.google.com/file/d/10T8CDSrdfSeYBWXke4pCYC3jS1V4UaPc/view?usp=sharing" },
         ],
       },
       {
@@ -154,7 +154,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         tech: "Microsoft Copilot Studio · RAG · Power Automate",
         thumbnail: thumbSssAgent,
         links: [
-          { label: "Documentation", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQA2LHmrPIwoTp7OCuf1GpRBAQwHjLYT-xstCR-O_ZDmFpo?e=hdfKb2" },
+          { label: "Documentation", href: "https://drive.google.com/file/d/141f5OrIoy8GV9_PEHKZ3vrKEia5bfELf/view?usp=sharing" },
         ],
       },
     ],
@@ -170,7 +170,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbPbiFi,
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/FI%20Index%20Scorecard%20Review.pbix" },
-          { label: "Dashboard Glimpses", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQBOBaltx_VoT41JZS0b8dCxAa-WQ4WFY6FbZuAIRdKJEos?e=dKd4UD" },
+          { label: "Dashboard Glimpses", href: "https://drive.google.com/file/d/1cQ4Qo0ab3Sx_uOfPHvo8vM-thxNzKB9u/view?usp=sharing" },
         ],
       },
       {
@@ -179,7 +179,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         thumbnail: thumbPbiCarInfo,
         links: [
           { label: "GitHub", href: "https://github.com/chatterjeeankita0903-boop/Business-Intelligence-and-Strategy-Projects/blob/main/CarInfo%20Dashboard%20Final.pbix" },
-          { label: "Dashboard Glimpses", href: "https://1drv.ms/w/c/66052eb9d4e727fc/IQDl99cV37P3SZV8CjU74Mr-AV8ku5VFLMFWhZQZDZbd4sE?e=95kWH1" },
+          { label: "Dashboard Glimpses", href: "https://drive.google.com/file/d/14NjefDUjtaUcDMV_SNNfcL6utYxr8rCf/view?usp=sharing" },
         ],
       },
       {
