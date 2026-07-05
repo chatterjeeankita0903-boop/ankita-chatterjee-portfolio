@@ -736,11 +736,11 @@ function Projects() {
                       className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-md"
                     >
                       {p.thumbnail && (
-                        <a
-                          href={p.links[0]?.href}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6"
+                        <button
+                          type="button"
+                          onClick={() => setLightbox({ src: p.thumbnail!, alt: `${p.title} preview` })}
+                          className="flex items-center justify-center border-b border-border bg-gradient-to-br from-muted to-background p-6 cursor-zoom-in"
+                          aria-label={`Expand ${p.title} preview`}
                         >
                           {group.id === "copilot-agents" || group.id === "powerbi" || group.id === "langchain-agents" ? (
                             <div className="w-full overflow-hidden rounded-lg border border-border bg-background shadow-md">
@@ -765,7 +765,7 @@ function Projects() {
                               </div>
                             </div>
                           )}
-                        </a>
+                        </button>
                       )}
                       <div className="flex flex-1 flex-col p-6">
                         <h4 className="font-display text-lg font-semibold leading-snug text-primary">
