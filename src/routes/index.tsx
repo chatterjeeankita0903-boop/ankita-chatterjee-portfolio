@@ -120,6 +120,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Field-ready app for logging, tracking, and managing lighting defects across locations — streamlining on-site quality reporting.",
         tech: "Lovable · React · Supabase",
         thumbnail: thumbLighting,
+        flowchart: flowLighting.url,
         links: [{ label: "Live App", href: "https://lightingdefectregister.lovable.app/" }],
       },
       {
