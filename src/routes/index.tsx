@@ -139,6 +139,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Interactive web app visualizing financial inclusion scheme performance and FI Index metrics in a clean, browser-based interface.",
         tech: "Lovable · React · MS Excel",
         thumbnail: thumbFiScorecard,
+        flowchart: flowFiScorecard.url,
         links: [{ label: "Dashboard", href: "https://fiscorecard.lovable.app" }],
       },
       {
