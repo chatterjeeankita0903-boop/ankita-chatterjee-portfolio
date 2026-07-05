@@ -147,6 +147,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
         description: "Luxury D2C beauty storefront for product reviews and customer query resolution — integrated with a live n8n automation workflow.",
         tech: "Lovable · React · n8n · Telegram · Google Sheets · OpenAI GPT-4",
         thumbnail: thumbLumiere,
+        flowchart: flowLumiere.url,
         links: [
           { label: "Live App", href: "https://lumiere-ankita.lovable.app" },
           { label: "Walkthrough", href: "https://drive.google.com/file/d/1TeaItOd8ICoHOH1zZ-StoEeJrtQ2-hVx/view?usp=sharing" },
