@@ -273,7 +273,7 @@ const PROJECT_GROUPS: { id: string; title: string; icon: React.ComponentType<{ c
 const SKILLS = {
   Technical: [
     "SAP", "Java", "Python", "SQL", "C++", "Apache Superset",
-    "Jira", "Postman", "n8n", "Power Automate", "LangGraph", "LangChain",
+    "Jira", "REST API", "n8n", "Power Automate", "LangGraph", "LangChain",
     "Power BI", "Power Apps", "Copilot Studio", "Figma", "Draw.io", "Whimsical",
   ],
   "Product Management": [
